@@ -1,0 +1,10 @@
+C:/Users/ira-k/OneDrive/Desktop/flutterrr/marathon/build/windows/CMakeFiles/INSTALL.dir
+C:/Users/ira-k/OneDrive/Desktop/flutterrr/marathon/build/windows/CMakeFiles/ALL_BUILD.dir
+C:/Users/ira-k/OneDrive/Desktop/flutterrr/marathon/build/windows/CMakeFiles/ZERO_CHECK.dir
+C:/Users/ira-k/OneDrive/Desktop/flutterrr/marathon/build/windows/flutter/CMakeFiles/flutter_wrapper_plugin.dir
+C:/Users/ira-k/OneDrive/Desktop/flutterrr/marathon/build/windows/flutter/CMakeFiles/flutter_wrapper_app.dir
+C:/Users/ira-k/OneDrive/Desktop/flutterrr/marathon/build/windows/flutter/CMakeFiles/flutter_assemble.dir
+C:/Users/ira-k/OneDrive/Desktop/flutterrr/marathon/build/windows/flutter/CMakeFiles/INSTALL.dir
+C:/Users/ira-k/OneDrive/Desktop/flutterrr/marathon/build/windows/runner/CMakeFiles/marathon.dir
+C:/Users/ira-k/OneDrive/Desktop/flutterrr/marathon/build/windows/runner/CMakeFiles/INSTALL.dir
+C:/Users/ira-k/OneDrive/Desktop/flutterrr/marathon/build/windows/runner/CMakeFiles/ALL_BUILD.dir
