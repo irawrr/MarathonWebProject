@@ -1,0 +1,10 @@
+^C:\USERS\IRA-K\ONEDRIVE\DESKTOP\FLUTTERRR\MARATHON\BUILD\WINDOWS\CMAKEFILES\084DB43176DF8866BAE8A116D5C4127A\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
