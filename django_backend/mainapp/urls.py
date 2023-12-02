@@ -1,5 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers, serializers, viewsets
+from rest_framework.authtoken import views as authtoken_views
 from . import models
 from . import views
 
@@ -20,7 +21,6 @@ router.register(r'users', UserViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls')),
-    path('api/hello-world', views.HelloWorld.as_view()),
-    # path('api/registrate-user/')
+    path('api-token-auth', authtoken_views.obtain_auth_token),
+    path('hello-world', views.HelloWorld.as_view()),
 ]
