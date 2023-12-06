@@ -70,7 +70,7 @@ class _DetailedInfoScreen extends State<DetailedInfoScreen> {
                           padding: MaterialStateProperty.all(EdgeInsets.all(5))
                         ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/check');
+                            Navigator.pushNamed(context, '/marathon_info');
                             }, child: const Text('Marathon Skills 2023', style: TextStyle(fontSize: 25,color: Colors.black))),
                     ),
                 ),
