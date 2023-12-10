@@ -12,7 +12,7 @@ class Gender(models.Model):
 
 class Country(models.Model):
     name = models.CharField(max_length=80)
-    flag = models.ImageField(upload_to='country_flags')
+    flag = models.ImageField(upload_to='images/country_flags')
 
     def __str__(self) -> str:
         return self.name
