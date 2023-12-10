@@ -27,7 +27,7 @@ def load_country_flags(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0002_populate_contries_and_genders'),
+        ('mainapp', '0002_populate_genders'),
     ]
 
     operations = [
