@@ -37,7 +37,35 @@ class _MySponsorScreen extends State<MySponsorScreen> {
                     }, child: const Text('Назад', style: TextStyle(fontSize: 20,color: Colors.black))),
                   ),
                 ),
-              const Text('MARATHON SKILLS 2023', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 30,color: Colors.white),),
+              const Text('MARATHON SKILLS 2023', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 30,color: Colors.white)),
+              Expanded(
+                child:Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                  Padding(
+                  padding: EdgeInsets.only(right: 40),
+                  child:
+                      SizedBox(
+                      width: 100,
+                      height: 35,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
+                          backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 215, 215, 215)),
+                          padding: MaterialStateProperty.all(EdgeInsets.all(5)),
+                        ),
+                        onPressed: () {Navigator.pushNamed(context, '/home');},
+                        child: const Text('Logout', style: TextStyle(fontSize: 20,color: Colors.black))
+                      ),
+                      ),
+                  )
+                  ]
+                )
+              )
             ],
           ),
       ),
