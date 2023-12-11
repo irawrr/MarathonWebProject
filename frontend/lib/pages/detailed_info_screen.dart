@@ -70,7 +70,7 @@ class _DetailedInfoScreen extends State<DetailedInfoScreen> {
                           padding: MaterialStateProperty.all(EdgeInsets.all(5))
                         ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/check');
+                            Navigator.pushNamed(context, '/marathon_info');
                             }, child: const Text('Marathon Skills 2023', style: TextStyle(fontSize: 25,color: Colors.black))),
                     ),
                 ),
@@ -90,7 +90,7 @@ class _DetailedInfoScreen extends State<DetailedInfoScreen> {
                           backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 233, 233, 233)),
                           padding: MaterialStateProperty.all(EdgeInsets.all(5))
                         ),
-                          onPressed: () {}, child: const Text('Насколько долгий марафон', style: TextStyle(fontSize: 25,color: Colors.black))),
+                          onPressed: () {Navigator.pushNamed(context, '/how_long');}, child: const Text('Насколько долгий марафон', style: TextStyle(fontSize: 25,color: Colors.black))),
                     ),
                 ),
             ],
