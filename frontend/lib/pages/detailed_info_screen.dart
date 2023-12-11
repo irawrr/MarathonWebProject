@@ -158,9 +158,8 @@ class _DetailedInfoScreen extends State<DetailedInfoScreen> {
                           backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 233, 233, 233)),
                           padding: MaterialStateProperty.all(EdgeInsets.all(5))
                         ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/check');
-                            }, child: const Text('BMI калькулятор', style: TextStyle(fontSize: 25,color: Colors.black))),
+                          onPressed: () { Navigator.pushNamed(context, '/bmi'); },
+                          child: const Text('BMI калькулятор', style: TextStyle(fontSize: 25,color: Colors.black))),
                     ),
                 ),
                 Padding(
@@ -179,7 +178,8 @@ class _DetailedInfoScreen extends State<DetailedInfoScreen> {
                           backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 233, 233, 233)),
                           padding: MaterialStateProperty.all(EdgeInsets.all(5))
                         ),
-                          onPressed: () {}, child: const Text('BMR калькулятор', style: TextStyle(fontSize: 25,color: Colors.black))),
+                          onPressed: () { Navigator.pushNamed(context, '/bmr'); },
+                          child: const Text('BMR калькулятор', style: TextStyle(fontSize: 25,color: Colors.black))),
                     ),
                 ),
             ],

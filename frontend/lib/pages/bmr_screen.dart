@@ -113,7 +113,7 @@ class _BMRScreenState extends State<BMRScreen> {
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ElevatedButton(
-            onPressed: () { /*тут что-то будет*/ },
+            onPressed: () { Navigator.pushNamed(context, '/info'); },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color.fromRGBO(204, 204, 204, 1),
               elevation: 0,
