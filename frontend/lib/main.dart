@@ -4,12 +4,13 @@ import 'package:marathon/pages/check_data_screen.dart';
 import 'package:marathon/pages/confirm_reg_screen.dart';
 import 'package:marathon/pages/coordinator_menu.dart';
 import 'package:marathon/pages/detailed_info_screen.dart';
+import 'package:marathon/pages/how_long_screen.dart';
 import 'package:marathon/pages/marathon_info.dart';
 import 'package:marathon/pages/runner_menu.dart';
 import 'pages/main_system_screen.dart';
 
 void main() => runApp(MaterialApp(
-  initialRoute: '/marathon_info',
+  initialRoute: '/how_long',
   routes: {
     '/home':(context) => const MainSystemScreen(),
     '/check':(context) => const CheckDataScreen(),
@@ -19,5 +20,6 @@ void main() => runApp(MaterialApp(
     '/coordinator_menu':(context) => const CoordinatorMenuScreen(),
     '/admin_menu':(context) => const AdminMenuScreen(),
     '/marathon_info':(context) => const MarathonInfoScreen(),
+    '/how_long':(context) => const HowLongScreen()
   },
 ));

@@ -77,7 +77,7 @@ class _MarathonInfoScreen extends State<MarathonInfoScreen> {
                               Column(mainAxisAlignment: MainAxisAlignment.center, children: const [Text('Карта марафона\n', style: TextStyle(fontSize: 33,color: Color.fromARGB(255, 87, 87, 87))),
                                                 Text('(Нажмите, чтобы открыть интерактивную карту)', style: TextStyle(fontSize: 20,color: Color.fromARGB(255, 87, 87, 87)),textAlign: TextAlign.center)])
                              ),
-                     ),
+                    ),
               ),
               const Padding(
                   padding: EdgeInsets.all(40),
