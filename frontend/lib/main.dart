@@ -9,6 +9,7 @@ import 'package:marathon/pages/how_long_screen.dart';
 import 'package:marathon/pages/marathon_info.dart';
 import 'package:marathon/pages/my_sponsor.dart';
 import 'package:marathon/pages/runner_menu.dart';
+import 'package:marathon/pages/runner_registration_screen.dart';
 import 'package:marathon/pages/bmr_screen.dart';
 import 'package:marathon/pages/bmi_screen.dart';
 import 'pages/main_system_screen.dart';
@@ -22,6 +23,7 @@ void main() => runApp(MaterialApp(
     '/info':(context) => const DetailedInfoScreen(),
     '/reg_confirm':(context) => const ConfirmRegScreen(),
     '/runner_menu':(context) => const RunnerMenuScreen(),
+    '/runner_reg':(context) => const RunnerRegistrationHomeScreen(),
     '/coordinator_menu':(context) => const CoordinatorMenuScreen(),
     '/admin_menu':(context) => const AdminMenuScreen(),
     '/marathon_info':(context) => const MarathonInfoScreen(),
