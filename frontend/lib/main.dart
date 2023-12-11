@@ -7,11 +7,12 @@ import 'package:marathon/pages/coordinator_menu.dart';
 import 'package:marathon/pages/detailed_info_screen.dart';
 import 'package:marathon/pages/how_long_screen.dart';
 import 'package:marathon/pages/marathon_info.dart';
+import 'package:marathon/pages/my_sponsor.dart';
 import 'package:marathon/pages/runner_menu.dart';
 import 'pages/main_system_screen.dart';
 
 void main() => runApp(MaterialApp(
-  initialRoute: '/sponsor_confirm',
+  initialRoute: '/my_sponsor',
   routes: {
     '/home':(context) => const MainSystemScreen(),
     '/check':(context) => const CheckDataScreen(),
@@ -23,5 +24,6 @@ void main() => runApp(MaterialApp(
     '/marathon_info':(context) => const MarathonInfoScreen(),
     '/how_long':(context) => const HowLongScreen(),
     '/sponsor_confirm':(context) => const ConfirmSponsorScreen(),
+    '/my_sponsor':(context) => const MySponsorScreen(),
   },
 ));
