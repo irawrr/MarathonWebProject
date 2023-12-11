@@ -7,22 +7,13 @@ class BMIHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => BMIHomeScreenState(),
-      builder: (context, child) {
-          return MaterialApp(
-            title: 'Marathon Skills 2023 - BMI Calculator',
-            theme: ThemeData(
-              useMaterial3: false,
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
-            ),
-            home: BMIScreen(),
-          );
-      }
+      create: (context) => PageState(),
+      child: const BMIScreen(),
     );
   }
 }
 
-class BMIHomeScreenState extends ChangeNotifier {
+class PageState extends ChangeNotifier {
   var chosenGender = '';
   var current = 24.2;
 
@@ -53,7 +44,7 @@ class BMIScreen extends StatefulWidget {
 class _BMIScreenState extends State<BMIScreen> {
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<BMIHomeScreenState>();
+    var appState = context.watch<PageState>();
     var curBMI = appState.current;
 
     return Scaffold(
@@ -157,7 +148,7 @@ class GenderOptionState extends State<GenderOption> {
 
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<BMIHomeScreenState>();
+    var appState = context.watch<PageState>();
 
     return Row(
       children: [
@@ -408,7 +399,7 @@ class InputFormsState extends State<InputForms> {
 
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<BMIHomeScreenState>();
+    var appState = context.watch<PageState>();
 
     return Form(
       key: _formKey,

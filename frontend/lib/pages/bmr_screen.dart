@@ -7,22 +7,13 @@ class BMRHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => BMRHomeScreenState(),
-      builder: (context, child) {
-          return MaterialApp(
-            title: 'Marathon Skills 2023 - BMR Calculator',
-            theme: ThemeData(
-              useMaterial3: false,
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
-            ),
-            home: BMRScreen(),
-          );
-        }
+      create: (context) => PageState(),
+      child: const BMRScreen(),
     );
   }
 }
 
-class BMRHomeScreenState extends ChangeNotifier {
+class PageState extends ChangeNotifier {
   var current = 1.67;
   var chosenGender = '';
 
@@ -57,7 +48,7 @@ class BMRScreen extends StatefulWidget {
 class _BMRScreenState extends State<BMRScreen> {
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<BMRHomeScreenState>();
+    var appState = context.watch<PageState>();
     var curBMR = appState.current;
 
     return Scaffold(
@@ -157,7 +148,7 @@ class GenderOptionState extends State<GenderOption> {
 
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<BMRHomeScreenState>();
+    var appState = context.watch<PageState>();
 
     return Row(
       children: [
@@ -386,7 +377,7 @@ class InputFormsState extends State<InputForms> {
 
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<BMRHomeScreenState>();
+    var appState = context.watch<PageState>();
 
     return Form(
       key: _formKey,
