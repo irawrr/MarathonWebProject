@@ -90,7 +90,7 @@ class _DetailedInfoScreen extends State<DetailedInfoScreen> {
                           backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 233, 233, 233)),
                           padding: MaterialStateProperty.all(EdgeInsets.all(5))
                         ),
-                          onPressed: () {}, child: const Text('Насколько долгий марафон', style: TextStyle(fontSize: 25,color: Colors.black))),
+                          onPressed: () {Navigator.pushNamed(context, '/how_long');}, child: const Text('Насколько долгий марафон', style: TextStyle(fontSize: 25,color: Colors.black))),
                     ),
                 ),
             ],
