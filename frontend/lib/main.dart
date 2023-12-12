@@ -3,6 +3,7 @@ import 'package:marathon/pages/admin_menu.dart';
 import 'package:marathon/pages/check_data_screen.dart';
 import 'package:marathon/pages/confirm_reg_screen.dart';
 import 'package:marathon/pages/confirm_sponsor.dart';
+import 'package:marathon/pages/control_runners.dart';
 import 'package:marathon/pages/coordinator_menu.dart';
 import 'package:marathon/pages/detailed_info_screen.dart';
 import 'package:marathon/pages/how_long_screen.dart';
@@ -19,7 +20,7 @@ import 'pages/main_system_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MaterialApp(
-  initialRoute: '/my_results',
+  initialRoute: '/control_runners',
   routes: {
     '/home':(context) => const MainSystemScreen(),
     '/check':(context) => const CheckDataScreen(),
@@ -38,6 +39,7 @@ void main() => runApp(MaterialApp(
     '/bmr':(context) => const BMRHomeScreen(),
     '/past_races':(context) => const PastRacesResult(),
     '/my_results':(context) => const MyResultsScreen(),
+    '/control_runners':(context) => const ControlRunners()
 
   },
 ));
