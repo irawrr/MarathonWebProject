@@ -20,7 +20,7 @@ class GenderSerializer(serializers.HyperlinkedModelSerializer):
         model = models.Gender
         fields = '__all__'
 
-class CounrtySerializer(serializers.HyperlinkedModelSerializer):
+class CountrySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Country
         fields =  '__all__'

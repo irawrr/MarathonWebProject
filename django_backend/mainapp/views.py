@@ -23,7 +23,7 @@ class GenderViewSet(viewsets.ModelViewSet):
 
 class CountriesViewSet(viewsets.ModelViewSet):
     queryset = models.Country.objects.all()
-    serializer_class = my_serializers.CounrtySerializer
+    serializer_class = my_serializers.CountrySerializer
 
 class RunnerViewSet(viewsets.ModelViewSet):
     queryset = models.Runner.objects.all()
