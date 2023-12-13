@@ -7,6 +7,7 @@ import 'package:marathon/pages/control_runners.dart';
 import 'package:marathon/pages/coordinator_menu.dart';
 import 'package:marathon/pages/detailed_info_screen.dart';
 import 'package:marathon/pages/how_long_screen.dart';
+import 'package:marathon/pages/inventory.dart';
 import 'package:marathon/pages/inventory_arrival.dart';
 import 'package:marathon/pages/load_volunteer.dart';
 import 'package:marathon/pages/marathon_info.dart';
@@ -22,7 +23,7 @@ import 'pages/main_system_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MaterialApp(
-  initialRoute: '/inventory_arrival',
+  initialRoute: '/inventory',
   routes: {
     '/home':(context) => const MainSystemScreen(),
     '/check':(context) => const CheckDataScreen(),
@@ -43,7 +44,9 @@ void main() => runApp(MaterialApp(
     '/my_results':(context) => const MyResultsScreen(),
     '/control_runners':(context) => const ControlRunners(),
     '/load_volunteer':(context) => const LoadVolunteer(),
-    '/inventory_arrival':(context) => const InventoryArrival()
+    '/inventory_arrival':(context) => const InventoryArrival(),
+    '/inventory':(context) => const InventoryScreen()
+
 
 
 
