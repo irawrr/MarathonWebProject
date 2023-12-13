@@ -11,6 +11,7 @@ import 'package:marathon/pages/how_long_screen.dart';
 import 'package:marathon/pages/inventory.dart';
 import 'package:marathon/pages/inventory_arrival.dart';
 import 'package:marathon/pages/load_volunteer.dart';
+import 'package:marathon/pages/manage_runner.dart';
 import 'package:marathon/pages/marathon_info.dart';
 import 'package:marathon/pages/my_results.dart';
 import 'package:marathon/pages/my_sponsor.dart';
@@ -26,7 +27,7 @@ import 'pages/main_system_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MaterialApp(
-  initialRoute: '/runner_edit',
+  initialRoute: '/manage_runner',
   routes: {
     '/home':(context) => const MainSystemScreen(),
     '/check':(context) => const CheckDataScreen(),
@@ -37,6 +38,7 @@ void main() => runApp(MaterialApp(
     '/runner_edit':(context) => const RunnerProfileEditHomeScreen(),
     '/coordinator_menu':(context) => const CoordinatorMenuScreen(),
     '/admin_menu':(context) => const AdminMenuScreen(),
+    '/manage_runner':(context) => const ManageRunnerHomeScreen(),
     '/marathon_info':(context) => const MarathonInfoScreen(),
     '/event_reg':(context) => const EventRegistrationHomeScreen(),
     '/how_long':(context) => const HowLongScreen(),

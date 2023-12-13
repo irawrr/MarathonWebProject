@@ -312,7 +312,7 @@ class _ControlRunners extends State<ControlRunners> {
                                       backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 215, 215, 215)),
                                       padding: MaterialStateProperty.all(EdgeInsets.all(5)),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () { Navigator.pushNamed(context, '/manage_runner'); },
                                     child: const Text('edit', style: TextStyle(fontSize: 20,color: Colors.black)))
                                 )
                       )
