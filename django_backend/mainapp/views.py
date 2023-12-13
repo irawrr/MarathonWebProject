@@ -1,8 +1,10 @@
+import csv
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import viewsets
+from rest_framework.parsers import FormParser, MultiPartParser
 from . import models
 from . import serializers as my_serializers
 
@@ -49,3 +51,37 @@ class SignUpView(generics.CreateAPIView):
 
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+class VolunteerUploadView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+    
+    def post(self, request, *args, **kwargs):
+        if 'file' not in request.FILES:
+            return Response({'error': 'No file sent'}, status=status.HTTP_400_BAD_REQUEST)
+        file = request.FILES['file']
+
+        if not file.name.endswith('.csv'):
+            return Response({'error': 'Invalid file format'}, status=status.HTTP_400_BAD_REQUEST)
+
+        volunteers = []
+        try:
+            decoded_file = file.read().decode('utf-8')
+            csv_reader = csv.DictReader(decoded_file.splitlines())
+            allowed_field_names = ['VolunteerId', 'FirstName', 'LastName', 'CountryCode', 'Gender']
+            for field_name in csv_reader.fieldnames:
+                if field_name not in allowed_field_names:
+                    return Response({'error': f'Fields in csv are incorrect. Invalid field name: {field_name}'}, status=status.HTTP_400_BAD_REQUEST)
+            for row in csv_reader:
+                row = dict(
+                    first_name=row['FirstName'],
+                    last_name=row['LastName'],
+                    country_code=row['CountryCode'],
+                    gender=row['Gender']
+                )
+                serializer = my_serializers.VolunteerCSVSerializer(data=row)
+                serializer.is_valid(raise_exception=True)
+                volunteers.append(serializer.save())
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return Response({'success': f'{len(volunteers)} volunteers created'}, status=status.HTTP_201_CREATED)

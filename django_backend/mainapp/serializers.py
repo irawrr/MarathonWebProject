@@ -30,6 +30,11 @@ class RunnerProfileSerializer(serializers.HyperlinkedModelSerializer):
         model = models.Runner
         fields = ['date_of_birth', 'gender', 'country']
 
+class VolunteerSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = models.Volunteer
+        fields = '__all__'
+
 class SignUpSerializer(serializers.ModelSerializer):
     runner_profile = RunnerProfileSerializer(required=True)
 
@@ -44,3 +49,19 @@ class SignUpSerializer(serializers.ModelSerializer):
         user = models.User.objects.create(**user_data)
         models.Runner.objects.create(user=user, **runner_data)
         return user
+    
+class VolunteerCSVSerializer(serializers.Serializer):
+    # volunteer_id = serializers.IntegerField()
+    first_name = serializers.CharField(max_length=80)
+    last_name = serializers.CharField(max_length=80)
+    country_code = serializers.CharField(max_length=3)
+    gender = serializers.CharField(max_length=1)
+
+    def create(self, validated_data):
+        country_code = validated_data.pop('country_code')
+        gender = {'F': 'Female', 'M': 'Male'}[validated_data.pop('gender')]
+
+        country = models.Country.objects.get(code=country_code)
+        gender = models.Gender.objects.get(name=gender)
+
+        return models.Volunteer.objects.create(country=country, gender=gender, **validated_data)
