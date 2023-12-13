@@ -18,6 +18,7 @@ import 'package:marathon/pages/past_races_results.dart';
 import 'package:marathon/pages/runner_menu.dart';
 import 'package:marathon/pages/runner_sponsor.dart';
 import 'package:marathon/pages/runner_registration_screen.dart';
+import 'package:marathon/pages/runner_profile_edit.dart';
 import 'package:marathon/pages/user_management.dart';
 import 'package:marathon/pages/bmr_screen.dart';
 import 'package:marathon/pages/bmi_screen.dart';
@@ -25,7 +26,7 @@ import 'pages/main_system_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MaterialApp(
-  initialRoute: '/user_management',
+  initialRoute: '/runner_edit',
   routes: {
     '/home':(context) => const MainSystemScreen(),
     '/check':(context) => const CheckDataScreen(),
@@ -33,6 +34,7 @@ void main() => runApp(MaterialApp(
     '/reg_confirm':(context) => const ConfirmRegScreen(),
     '/runner_menu':(context) => const RunnerMenuScreen(),
     '/runner_reg':(context) => const RunnerRegistrationHomeScreen(),
+    '/runner_edit':(context) => const RunnerProfileEditHomeScreen(),
     '/coordinator_menu':(context) => const CoordinatorMenuScreen(),
     '/admin_menu':(context) => const AdminMenuScreen(),
     '/marathon_info':(context) => const MarathonInfoScreen(),
