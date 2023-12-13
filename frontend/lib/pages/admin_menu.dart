@@ -98,7 +98,7 @@ class _AdminMenuScreen extends State<AdminMenuScreen> {
                           padding: MaterialStateProperty.all(EdgeInsets.all(5))
                         ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/check');
+                            Navigator.pushNamed(context, '/user_management');
                             }, child: const Text('Пользователи', style: TextStyle(fontSize: 25,color: Colors.black))),
                     ),
                 ),
