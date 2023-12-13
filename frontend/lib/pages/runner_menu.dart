@@ -98,7 +98,7 @@ class _RunnerMenuScreen extends State<RunnerMenuScreen> {
                           padding: MaterialStateProperty.all(EdgeInsets.all(5))
                         ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/check');
+                            Navigator.pushNamed(context, '/event_reg');
                             }, child: const Text('Регистрация на марафон', style: TextStyle(fontSize: 25,color: Colors.black))),
                     ),
                 ),
