@@ -3,12 +3,18 @@ import 'package:marathon/pages/admin_menu.dart';
 import 'package:marathon/pages/check_data_screen.dart';
 import 'package:marathon/pages/confirm_reg_screen.dart';
 import 'package:marathon/pages/confirm_sponsor.dart';
+import 'package:marathon/pages/control_runners.dart';
 import 'package:marathon/pages/coordinator_menu.dart';
 import 'package:marathon/pages/detailed_info_screen.dart';
 import 'package:marathon/pages/event_registration_screen.dart';
 import 'package:marathon/pages/how_long_screen.dart';
+import 'package:marathon/pages/inventory.dart';
+import 'package:marathon/pages/inventory_arrival.dart';
+import 'package:marathon/pages/load_volunteer.dart';
 import 'package:marathon/pages/marathon_info.dart';
+import 'package:marathon/pages/my_results.dart';
 import 'package:marathon/pages/my_sponsor.dart';
+import 'package:marathon/pages/past_races_results.dart';
 import 'package:marathon/pages/runner_menu.dart';
 import 'package:marathon/pages/runner_sponsor.dart';
 import 'package:marathon/pages/runner_registration_screen.dart';
@@ -38,5 +44,11 @@ void main() => runApp(MaterialApp(
     '/user_management':(context) => const UserManagementHomeScreen(),
     '/bmi':(context) => const BMIHomeScreen(),
     '/bmr':(context) => const BMRHomeScreen(),
+    '/past_races':(context) => const PastRacesResult(),
+    '/my_results':(context) => const MyResultsScreen(),
+    '/control_runners':(context) => const ControlRunners(),
+    '/load_volunteer':(context) => const LoadVolunteer(),
+    '/inventory_arrival':(context) => const InventoryArrival(),
+    '/inventory':(context) => const InventoryScreen()
   },
 ));

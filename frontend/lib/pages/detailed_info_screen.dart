@@ -115,7 +115,7 @@ class _DetailedInfoScreen extends State<DetailedInfoScreen> {
                           padding: MaterialStateProperty.all(EdgeInsets.all(5))
                         ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/check');
+                            Navigator.pushNamed(context, '/past_races');
                             }, child: const Text('Предыдущие результаты', style: TextStyle(fontSize: 25,color: Colors.black))),
                     ),
                 ),
