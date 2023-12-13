@@ -12,13 +12,14 @@ import 'package:marathon/pages/my_sponsor.dart';
 import 'package:marathon/pages/runner_menu.dart';
 import 'package:marathon/pages/runner_sponsor.dart';
 import 'package:marathon/pages/runner_registration_screen.dart';
+import 'package:marathon/pages/user_management.dart';
 import 'package:marathon/pages/bmr_screen.dart';
 import 'package:marathon/pages/bmi_screen.dart';
 import 'pages/main_system_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MaterialApp(
-  initialRoute: '/event_reg',
+  initialRoute: '/user_management',
   routes: {
     '/home':(context) => const MainSystemScreen(),
     '/check':(context) => const CheckDataScreen(),
@@ -34,6 +35,7 @@ void main() => runApp(MaterialApp(
     '/sponsor_confirm':(context) => const ConfirmSponsorScreen(),
     '/my_sponsor':(context) => const MySponsorScreen(),
     '/runner_sponsor':(context) => const RunnerSponsorScreen(),
+    '/user_management':(context) => const UserManagementHomeScreen(),
     '/bmi':(context) => const BMIHomeScreen(),
     '/bmr':(context) => const BMRHomeScreen(),
   },
