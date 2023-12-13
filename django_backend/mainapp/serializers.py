@@ -51,17 +51,26 @@ class SignUpSerializer(serializers.ModelSerializer):
         return user
     
 class VolunteerCSVSerializer(serializers.Serializer):
-    # volunteer_id = serializers.IntegerField()
+    volunteer_id = serializers.IntegerField()
     first_name = serializers.CharField(max_length=80)
     last_name = serializers.CharField(max_length=80)
     country_code = serializers.CharField(max_length=3)
     gender = serializers.CharField(max_length=1)
 
     def create(self, validated_data):
+        pk = validated_data.pop('volunteer_id')
         country_code = validated_data.pop('country_code')
         gender = {'F': 'Female', 'M': 'Male'}[validated_data.pop('gender')]
 
         country = models.Country.objects.get(code=country_code)
         gender = models.Gender.objects.get(name=gender)
 
-        return models.Volunteer.objects.create(country=country, gender=gender, **validated_data)
+        data = dict(country=country, gender=gender, **validated_data)
+        volunteer, is_created = models.Volunteer.objects.get_or_create(pk=pk, defaults=data)
+        if not is_created:
+            volunteer.country = country
+            volunteer.gender = gender
+            volunteer.first_name = data['first_name']
+            volunteer.last_name = data['last_name']
+            volunteer.save()
+        return volunteer

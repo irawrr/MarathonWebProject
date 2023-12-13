@@ -73,6 +73,7 @@ class VolunteerUploadView(APIView):
                     return Response({'error': f'Fields in csv are incorrect. Invalid field name: {field_name}'}, status=status.HTTP_400_BAD_REQUEST)
             for row in csv_reader:
                 row = dict(
+                    volunteer_id=row['VolunteerId'],
                     first_name=row['FirstName'],
                     last_name=row['LastName'],
                     country_code=row['CountryCode'],
@@ -84,4 +85,4 @@ class VolunteerUploadView(APIView):
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        return Response({'success': f'{len(volunteers)} volunteers created'}, status=status.HTTP_201_CREATED)
+        return Response({'success': f'{len(volunteers)} volunteers processed'}, status=status.HTTP_201_CREATED)
