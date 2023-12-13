@@ -553,11 +553,7 @@ class ImageFormState extends State<ImageForm> {
           Column (
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              _logoImage != null
-                  ? Image.file(
-                _logoImage!,
-                height: 100,
-              ) : const Text("Файл фото:",
+              const Text("Файл фото:",
                 textAlign: TextAlign.left,
                 style: TextStyle(fontSize: 16, color: Colors.black),
               ),
@@ -598,12 +594,8 @@ class ImageFormState extends State<ImageForm> {
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(234, 234, 234, 1),
                   border: Border.all(width: 1, color: Color.fromRGBO(82, 82, 82, 1),),),
-                child: pageState.pfpPath.isNotEmpty ?
-                Image.network(
-                  (pageState.pfpPath),
-                  fit: BoxFit.fill,
-                ) : const Text("Фото", style: TextStyle(fontSize: 16, color: Colors.black),),
-
+                child: _logoImage != null ? Image.file(_logoImage!, height: 120) :
+                       const Text("Фото", style: TextStyle(fontSize: 16, color: Colors.black),),
               ),
               SizedBox(height: 8,),
               OutlinedButton(
