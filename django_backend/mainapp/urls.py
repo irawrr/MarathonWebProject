@@ -11,6 +11,7 @@ router.register(r'users', views.UserViewSet)
 router.register(r'runners', views.RunnerViewSet)
 router.register(r'genders', views.GenderViewSet)
 router.register(r'countries', views.CountriesViewSet)
+router.register(r'volunteers', views.VolunteerViewSet)
 
 
 urlpatterns = [

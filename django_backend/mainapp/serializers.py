@@ -31,9 +31,11 @@ class RunnerProfileSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['date_of_birth', 'gender', 'country']
 
 class VolunteerSerializer(serializers.HyperlinkedModelSerializer):
+    country_name = serializers.CharField(source='country.name', read_only=True)
+    gender_name = serializers.CharField(source='gender.name', read_only=True)
     class Meta:
         model = models.Volunteer
-        fields = '__all__'
+        fields = ['url', 'first_name', 'last_name', 'country', 'country_name', 'gender', 'gender_name']
 
 class SignUpSerializer(serializers.ModelSerializer):
     runner_profile = RunnerProfileSerializer(required=True)

@@ -29,6 +29,10 @@ class RunnerViewSet(viewsets.ModelViewSet):
     queryset = models.Runner.objects.all()
     serializer_class = my_serializers.RunnerSerializer
 
+class VolunteerViewSet(viewsets.ModelViewSet):
+    queryset = models.Volunteer.objects.all()
+    serializer_class = my_serializers.VolunteerSerializer
+
 class SignUpView(generics.CreateAPIView):
     queryset = models.Runner.objects.all()
     serializer_class = my_serializers.SignUpSerializer
