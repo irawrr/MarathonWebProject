@@ -332,7 +332,7 @@ class EditProfileFormsState extends State<EditProfileForms> {
                         text: const TextSpan(
                           style: TextStyle(fontSize: 16.0, color: Color.fromRGBO(150, 150, 150, 1), fontStyle: FontStyle.italic),
                           children: <TextSpan> [TextSpan(text:
-                          'Оставьте эти поля незаполненными, если не хотите изменять пароль'),
+                            'Оставьте эти поля незаполненными, если не хотите изменять пароль'),
                           ],
                         ),
                       ),
@@ -594,15 +594,15 @@ class ImageFormState extends State<ImageForm> {
                 width: 90,
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(234, 234, 234, 1),
-                  border: Border.all(width: 1, color: Color.fromRGBO(82, 82, 82, 1),),),
+                  border: Border.all(width: 1, color: const Color.fromRGBO(82, 82, 82, 1),),),
                 child: _logoImage != null ? Image.file(_logoImage!, height: 120) :
                        const Text("Фото", style: TextStyle(fontSize: 16, color: Colors.black),),
               ),
-              SizedBox(height: 8,),
+              const SizedBox(height: 8,),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  backgroundColor: Color.fromRGBO(242, 242, 242, 1),
-                  side: BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
+                  backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
+                  side: const BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
                 ),
                 onPressed: () {
                   _selectLogoImage;
