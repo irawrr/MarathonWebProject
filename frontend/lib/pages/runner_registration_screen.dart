@@ -92,23 +92,33 @@ class RunnerRegistrationScreenState extends State<RunnerRegistrationScreen> {
         backgroundColor: const Color.fromRGBO(82, 82, 82, 1),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Регистрация бегуна',
-              style: TextStyle(fontSize: 30, color: Color.fromRGBO(91, 91, 91, 1)),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: const Text(
-                'Пожалуйста, заполните всю информацию, чтобы зарегистрироваться в качестве бегуна',
-                style: TextStyle(fontSize: 18, color: Colors.black),
-                textAlign: TextAlign.center,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 20),
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Text(
+                    'Регистрация бегуна',
+                    style: TextStyle(fontSize: 30, color: Color.fromRGBO(91, 91, 91, 1)),
+                  ),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: const Text(
+                      'Пожалуйста, заполните всю информацию, чтобы зарегистрироваться в качестве бегуна',
+                      style: TextStyle(fontSize: 18, color: Colors.black),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const RegistrationForms(),
+                ],
               ),
             ),
-            const RegistrationForms(),
-          ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(
@@ -148,15 +158,18 @@ class RegistrationFormsState extends State<RegistrationForms> {
   @override
   Widget build(BuildContext context) {
     var pageState = context.watch<PageState>();
+    bool isScreenWide = MediaQuery.sizeOf(context).width >= 900;
 
     return Form(
       key: _formKey,
       child: Center(
         child: Column(
           children: [
-            Row(
+            Flex(
+              direction: isScreenWide ? Axis.horizontal : Axis.vertical,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const SizedBox(height: 15),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: IntrinsicHeight (
@@ -318,7 +331,7 @@ class RegistrationFormsState extends State<RegistrationForms> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 100,),
+                const SizedBox(width: 100, height: 15),
                 Column(
                   children: [
                     const Padding(
