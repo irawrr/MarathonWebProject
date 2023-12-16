@@ -565,7 +565,7 @@ class ImageFormState extends State<ImageForm> {
                 width: 90,
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(234, 234, 234, 1),
-                  border: Border.all(width: 1, color: Color.fromRGBO(82, 82, 82, 1),),),
+                  border: Border.all(width: 1, color: const Color.fromRGBO(82, 82, 82, 1),),),
                 child: pageState.pfpPath.isNotEmpty ?
                 Image.network(
                   (pageState.pfpPath),
