@@ -19,150 +19,170 @@ class _MyResultsScreen extends State<MyResultsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isScreenWide = MediaQuery.sizeOf(context).width >= 1000;
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 87, 87, 87),
-        automaticallyImplyLeading: false,
-        title: Row(
-            children: <Widget>[
-              Padding(
-              padding: EdgeInsets.only(right: 40),
-              child:
-                  SizedBox(
-                  width: 90,
-                  height: 35,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                      backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 215, 215, 215)),
-                      padding: MaterialStateProperty.all(EdgeInsets.all(5)),
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/home');
-                    }, child: const Text('Назад', style: TextStyle(fontSize: 20,color: Colors.black))),
-                  ),
+        leadingWidth: 120,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/admin_menu');
+            },
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
                 ),
-              const Text('MARATHON SKILLS 2023', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 30,color: Colors.white)),
-              Expanded(
-                child:Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                  Padding(
-                  padding: EdgeInsets.only(right: 40),
-                  child:
-                      SizedBox(
-                      width: 100,
-                      height: 35,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                          ),
-                          backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 215, 215, 215)),
-                          padding: MaterialStateProperty.all(EdgeInsets.all(5)),
-                        ),
-                        onPressed: () {Navigator.pushNamed(context, '/home');},
-                        child: const Text('Logout', style: TextStyle(fontSize: 20,color: Colors.black))
-                      ),
-                      ),
-                  )
-                  ]
-                )
-              )
-            ],
+              ),
+              backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(204, 204, 204, 1)),
+              padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
+            ),
+            child: const Text(
+                'Назад',
+                style: TextStyle(color: Colors.black, fontSize: 18)
+            ),
           ),
+        ),
+        title: const Text(
+          "MARATHON SKILLS 2023",
+          style: TextStyle(fontWeight: FontWeight.w900, fontSize: 30, color: Colors.white,),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/home');
+              },
+              style: ButtonStyle(
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(204, 204, 204, 1)),
+                  padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
+                  fixedSize: MaterialStateProperty.all(const Size.fromWidth(120))
+              ),
+              child: const Text(
+                  'Log out',
+                  style: TextStyle(color: Colors.black, fontSize: 18)
+              ),
+            ),
+          ),
+        ],
+        backgroundColor: const Color.fromRGBO(82, 82, 82, 1),
       ),
       body:
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.only(bottom: 40, top: 10),
-              child:Text('Мои результаты', style: TextStyle(fontSize: 30,color: Color.fromARGB(255, 92, 92, 92)),),
-            ),
-            const Text('Это - список всех ваших прошлых результатов гонки Marathon Skills.', style: TextStyle(fontSize: 22,color: Color.fromARGB(255, 87, 87, 87)),textAlign: TextAlign.left),
-            const Text('Общее место сравнивает всех бегунов.', style: TextStyle(fontSize: 22,color: Color.fromARGB(255, 87, 87, 87)),textAlign: TextAlign.left),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 30),
-              child: Text('Место по категории сравнивает бегунов одного пола и категории.', style: TextStyle(fontSize: 22,color: Color.fromARGB(255, 87, 87, 87)),textAlign: TextAlign.left),
-            ),
-            Row( 
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 20),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-              Padding(
-                padding: EdgeInsets.only(bottom: 20, right: 10),
-                child:
-                  Text('Пол:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23,color: Color.fromARGB(255, 53, 53, 53))),
-              ),
-              Padding(
-                padding: EdgeInsets.only(bottom: 20, right: 40),
-                child:
-                  Text('мужской', style: TextStyle(fontSize: 23,color: Color.fromARGB(255, 53, 53, 53))),
-              ),
-              Padding(
-                padding: EdgeInsets.only(bottom: 20, right: 10),
-                child:
-                  Text('Возрастная категория:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23,color: Color.fromARGB(255, 53, 53, 53))),
-              ),
-              Padding(
-                padding: EdgeInsets.only(bottom: 20, right: 40),
-                child:
-                  Text('18-29', style: TextStyle(fontSize: 23,color: Color.fromARGB(255, 53, 53, 53))),
+              children: <Widget>[
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 40, top: 10),
+                  child:Text('Мои результаты', style: TextStyle(fontSize: 30,color: Color.fromARGB(255, 92, 92, 92)),),
+                ),
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Это - список всех ваших прошлых результатов гонки Marathon Skills.', style: TextStyle(fontSize: 22, color: Color.fromARGB(255, 87, 87, 87)),textAlign: TextAlign.center),
+                    Text('Общее место сравнивает всех бегунов.', style: TextStyle(fontSize: 22,color: Color.fromARGB(255, 87, 87, 87)),textAlign: TextAlign.center),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 30),
+                      child: Text('Место по категории сравнивает бегунов одного пола и категории.', style: TextStyle(fontSize: 22,color: Color.fromARGB(255, 87, 87, 87)),textAlign: TextAlign.center),
+                    ),
+                  ],
+                ),
+                Flex(
+                  direction: isScreenWide ? Axis.horizontal : Axis.vertical,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 20, right: 10),
+                        child:
+                          Text('Пол:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23,color: Color.fromARGB(255, 53, 53, 53))),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 20, right: 40),
+                        child:
+                          Text('мужской', style: TextStyle(fontSize: 23,color: Color.fromARGB(255, 53, 53, 53))),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 20, right: 10),
+                        child:
+                          Text('Возрастная категория:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23,color: Color.fromARGB(255, 53, 53, 53))),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 20, right: 40),
+                        child:
+                          Text('18-29', style: TextStyle(fontSize: 23,color: Color.fromARGB(255, 53, 53, 53))),
+                      ),
+                    ],
+                  )
+                  ]
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(25),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Table(
+                      columnWidths: const {
+                        0: FixedColumnWidth(200),
+                        1: FixedColumnWidth(250),
+                        2: FixedColumnWidth(150),
+                        3: FixedColumnWidth(150),
+                        4: FixedColumnWidth(150),
+                      },
+                      children: _users.map((user) {
+                        return TableRow(children: [
+                          Container(
+                              padding: const EdgeInsets.all(15),
+                              child:_users.indexOf(user) == 0
+                                  ? Text(user['marathon'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+                                  : Text(user['marathon'])),
+                          Container(
+                              padding: const EdgeInsets.all(15),
+                              child:_users.indexOf(user) == 0
+                                  ? Text(user['distance'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+                                  : Text(user['distance'])),
+                          Container(
+                              padding: const EdgeInsets.all(15),
+                              child:_users.indexOf(user) == 0
+                                  ? Text(user['time'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+                                  : Text(user['time'])),
+                          Container(
+                              padding: const EdgeInsets.all(15),
+                              child:_users.indexOf(user) == 0
+                                  ? Text(user['overall_place'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+                                  : Text(user['overall_place'])),
+                          Container(
+                              padding: const EdgeInsets.all(15),
+                              child:_users.indexOf(user) == 0
+                                  ? Text(user['category_place'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+                                  : Text(user['category_place'])),
+                        ]);
+                      }).toList()
+                    ),
+                  ),
               )
               ]
-            ),
-            Padding(
-              padding: const EdgeInsets.all(25),
-              child: SingleChildScrollView(
-                child: Table(
-                  columnWidths: const {
-                    0: FixedColumnWidth(200),
-                    1: FixedColumnWidth(250),
-                    2: FixedColumnWidth(150),
-                    3: FixedColumnWidth(150),
-                    4: FixedColumnWidth(150),
-                  },
-                  children: _users.map((user) {
-                    return TableRow(children: [
-                      Container(
-                          padding: const EdgeInsets.all(15),
-                          child:_users.indexOf(user) == 0
-                              ? Text(user['marathon'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-                              : Text(user['marathon'])),
-                      Container(
-                          padding: const EdgeInsets.all(15),
-                          child:_users.indexOf(user) == 0
-                              ? Text(user['distance'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-                              : Text(user['distance'])),
-                      Container(
-                          padding: const EdgeInsets.all(15),
-                          child:_users.indexOf(user) == 0
-                              ? Text(user['time'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-                              : Text(user['time'])),
-                      Container(
-                          padding: const EdgeInsets.all(15),
-                          child:_users.indexOf(user) == 0
-                              ? Text(user['overall_place'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-                              : Text(user['overall_place'])),
-                      Container(
-                          padding: const EdgeInsets.all(15),
-                          child:_users.indexOf(user) == 0
-                              ? Text(user['category_place'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-                              : Text(user['category_place'])),
-                    ]);
-                  }).toList()
-                ),
-              ),
-          )
-          ]
-        
+
       ),
+          ),
+        ),
     bottomNavigationBar: Container(
       padding: EdgeInsets.all(12),
       height: 50.0,
