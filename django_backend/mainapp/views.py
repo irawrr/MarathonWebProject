@@ -1,9 +1,7 @@
 import csv
-from rest_framework import generics
-from rest_framework import status
+from rest_framework import generics, status, viewsets, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import viewsets
 from rest_framework.parsers import FormParser, MultiPartParser
 from . import models
 from . import serializers as my_serializers
@@ -32,6 +30,8 @@ class RunnerViewSet(viewsets.ModelViewSet):
 class VolunteerViewSet(viewsets.ModelViewSet):
     queryset = models.Volunteer.objects.all()
     serializer_class = my_serializers.VolunteerSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['first_name', 'last_name', 'country__name', 'gender__name']
 
 class SignUpView(generics.CreateAPIView):
     queryset = models.Runner.objects.all()
