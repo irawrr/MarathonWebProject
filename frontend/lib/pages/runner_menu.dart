@@ -189,7 +189,7 @@ class _Content1 extends State<Content1> {
                           padding: MaterialStateProperty.all(EdgeInsets.all(5))
                         ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/check');
+                            Navigator.pushNamed(context, '/runner_edit');
                             }, child: const Text('Редактирование профиля', style: TextStyle(fontSize: 25,color: Colors.black))),
                     ),
                     SizedBox(

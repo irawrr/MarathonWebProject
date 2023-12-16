@@ -18,4 +18,5 @@ urlpatterns = [
     path('sign-up', views.SignUpView.as_view()),
     path('api-token-auth', authtoken_views.obtain_auth_token),
     path('hello-world', views.HelloWorld.as_view()),
+    path('upload-volunteers', views.VolunteerUploadView.as_view())
 ]
