@@ -20,7 +20,7 @@ class GenderSerializer(serializers.HyperlinkedModelSerializer):
         model = models.Gender
         fields = '__all__'
 
-class CounrtySerializer(serializers.HyperlinkedModelSerializer):
+class CountrySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Country
         fields =  '__all__'
@@ -29,6 +29,11 @@ class RunnerProfileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Runner
         fields = ['date_of_birth', 'gender', 'country']
+
+class VolunteerSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = models.Volunteer
+        fields = '__all__'
 
 class SignUpSerializer(serializers.ModelSerializer):
     runner_profile = RunnerProfileSerializer(required=True)
@@ -44,3 +49,28 @@ class SignUpSerializer(serializers.ModelSerializer):
         user = models.User.objects.create(**user_data)
         models.Runner.objects.create(user=user, **runner_data)
         return user
+    
+class VolunteerCSVSerializer(serializers.Serializer):
+    volunteer_id = serializers.IntegerField()
+    first_name = serializers.CharField(max_length=80)
+    last_name = serializers.CharField(max_length=80)
+    country_code = serializers.CharField(max_length=3)
+    gender = serializers.CharField(max_length=1)
+
+    def create(self, validated_data):
+        pk = validated_data.pop('volunteer_id')
+        country_code = validated_data.pop('country_code')
+        gender = {'F': 'Female', 'M': 'Male'}[validated_data.pop('gender')]
+
+        country = models.Country.objects.get(code=country_code)
+        gender = models.Gender.objects.get(name=gender)
+
+        data = dict(country=country, gender=gender, **validated_data)
+        volunteer, is_created = models.Volunteer.objects.get_or_create(pk=pk, defaults=data)
+        if not is_created:
+            volunteer.country = country
+            volunteer.gender = gender
+            volunteer.first_name = data['first_name']
+            volunteer.last_name = data['last_name']
+            volunteer.save()
+        return volunteer

@@ -135,3 +135,11 @@ class Sponsorship(models.Model):
         return self.name
     
 
+class Volunteer(models.Model):
+    first_name = models.CharField(max_length=80)
+    last_name = models.CharField(max_length=80)
+    country = models.ForeignKey(Country, on_delete=models.PROTECT)
+    gender = models.ForeignKey(Gender, on_delete=models.PROTECT)
+
+    def __str__(self) -> str:
+        return f'{self.first_name} {self.last_name}'

@@ -143,7 +143,7 @@ class _RunnerMenuScreen extends State<RunnerMenuScreen> {
                           padding: MaterialStateProperty.all(EdgeInsets.all(5))
                         ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/check');
+                            Navigator.pushNamed(context, '/runner_edit');
                             }, child: const Text('Редактирование профиля', style: TextStyle(fontSize: 25,color: Colors.black))),
                     ),
                 ),
