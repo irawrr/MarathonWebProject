@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:marathon/pages/add_user.dart';
 import 'package:marathon/pages/admin_menu.dart';
+import 'package:marathon/pages/certificate.dart';
 import 'package:marathon/pages/check_data_screen.dart';
 import 'package:marathon/pages/confirm_reg_screen.dart';
 import 'package:marathon/pages/confirm_sponsor.dart';
 import 'package:marathon/pages/control_runners.dart';
 import 'package:marathon/pages/coordinator_menu.dart';
 import 'package:marathon/pages/detailed_info_screen.dart';
+import 'package:marathon/pages/edit_user.dart';
 import 'package:marathon/pages/event_registration_screen.dart';
 import 'package:marathon/pages/how_long_screen.dart';
 import 'package:marathon/pages/inventory.dart';
@@ -27,7 +30,7 @@ import 'pages/main_system_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MaterialApp(
-  initialRoute: '/manage_runner',
+  initialRoute: '/add_user',
   routes: {
     '/home':(context) => const MainSystemScreen(),
     '/check':(context) => const CheckDataScreen(),
@@ -53,6 +56,9 @@ void main() => runApp(MaterialApp(
     '/control_runners':(context) => const ControlRunners(),
     '/load_volunteer':(context) => const LoadVolunteer(),
     '/inventory_arrival':(context) => const InventoryArrival(),
-    '/inventory':(context) => const InventoryScreen()
+    '/inventory':(context) => const InventoryScreen(),
+    '/certificate':(context) => const CertificateScreen(),
+    '/edit_user':(context) => const EditUser(),
+    '/add_user':(context) => const AddUser()
   },
 ));
