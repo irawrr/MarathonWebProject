@@ -100,15 +100,20 @@ class UserManagementScreenState extends State<UserManagementScreen> {
         backgroundColor: const Color.fromRGBO(82, 82, 82, 1),
       ),
       body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Управление пользователями',
-              style: TextStyle(fontSize: 30, color: Color.fromRGBO(91, 91, 91, 1)),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Управление пользователями',
+                  style: TextStyle(fontSize: 30, color: Color.fromRGBO(91, 91, 91, 1)),
+                ),
+                SelectFromDBForms(),
+              ],
             ),
-            SelectFromDBForms(),
-          ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(
@@ -137,23 +142,26 @@ class SelectFromDBFormsState extends State<SelectFromDBForms> {
   final _formKey = GlobalKey<FormState>();
   final _searchController = TextEditingController();
 
-  static final roleList = ['доминант', 'сабмиссив', 'свитч'];
-  static final columnList = ['1', '2', '3']; //заменить на данные бд
+  static final roleList = ['Бегун', 'Координатор', 'Спонсор'];
+  static final columnList = ['Имя', 'Фамилия', 'Email', 'Роль']; //заменить на данные бд
 
   @override
   Widget build(BuildContext context) {
     var pageState = context.watch<PageState>();
+    bool isScreenWide = MediaQuery.sizeOf(context).width >= 1000;
 
     return Form(
       key: _formKey,
       child: Center(
         child: Column(
           children: [
-            Row(
+            Flex(
+              direction: isScreenWide ? Axis.horizontal : Axis.vertical,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
                   children: [
+                    SizedBox(height: isScreenWide ? 0 : 25),
                     OutlinedButton(
                       style: OutlinedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
@@ -240,7 +248,9 @@ class SelectFromDBFormsState extends State<SelectFromDBForms> {
                 ),
               ],
             ), //верхний ряд
+            SizedBox(height: isScreenWide ? 0 : 15),
             SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -255,7 +265,7 @@ class SelectFromDBFormsState extends State<SelectFromDBForms> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const UserTable(),
+                  UserTable(),
                 ],
               ),
             )
@@ -267,73 +277,105 @@ class SelectFromDBFormsState extends State<SelectFromDBForms> {
 }
 
 class UserTable extends StatelessWidget {
-  const UserTable({
+  UserTable({
     super.key,
   });
 
+  // findMax (List<Map> list) {
+  //   List maxLenList = [];
+  //   for (var i = 0; i < list.length; i++) {
+  //     var maxElement = list[i].entries.reduce(
+  //         (a, b) => (a.value.toString().length >= b.value.toString().length) ? a : b
+  //     );
+  //     maxLenList.add(maxElement.value.toString().length);
+  //   }
+  //   return maxLenList;
+  // }
+
+  final List<Map> userList = [
+    {'name': 'Имя', 'last_name': 'Фамилия', 'email': 'Email', 'role': 'Роль', 'button': ''},
+    {'name': 'Павел', 'last_name': 'Зиновьев', 'email': 'zine@yandex.ru', 'role': 'Координатор', 'button': ''},
+    {'name': 'Андрей', 'last_name': 'Сущенко', 'email': 'suschenkoaa@mail.ru', 'role': 'Бегун', 'button': ''},
+    {'name': 'Василина', 'last_name': 'Мелихова', 'email': 'melikhova.va@dvfu.ru', 'role': 'Бегун', 'button': ''},
+    {'name': 'Оно', 'last_name': 'Йоко', 'email': 'realonoyoko@gmail.com', 'role': 'Спонсор', 'button': ''},
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return DataTable(
-      border: TableBorder.all(
-          width: 1.0,
-          color: const Color.fromRGBO(150, 150, 150, 1),
-      ),
-      columns: const <DataColumn>[
-          DataColumn(
-            label: Expanded(
-              child: Text('Имя', style: TextStyle(fontWeight: FontWeight.bold),),
-            ),
+    //var maxLenList = findMax(userList);
+
+    return Table(
+      border: TableBorder.all(width: 1.0, color: const Color.fromRGBO(101, 101, 101, 1)),
+      columnWidths: const {
+          0: FixedColumnWidth(200),
+          1: FixedColumnWidth(200),
+          2: FixedColumnWidth(200),
+          3: FixedColumnWidth(150),
+          4: FixedColumnWidth(100),
+      },
+      children: userList.map((user) {
+        return TableRow(children: [
+          TableCell(
+            // verticalAlignment: user['name'].toString().length != maxLenList[userList.indexOf(user)]
+            //     ? TableCellVerticalAlignment.fill : TableCellVerticalAlignment.top,
+            child: Container(
+                color: userList.indexOf(user) == 0 ? const Color.fromRGBO(165, 165, 165, 1)
+                     : userList.indexOf(user) % 2 == 0 ?
+                       const Color.fromRGBO(225, 225, 225, 1) : const Color.fromRGBO(240, 240, 240, 1),
+                padding: const EdgeInsets.all(15),
+                child: userList.indexOf(user) == 0
+                    ? Text(user['name'].toString(), style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold))
+                    : Text(user['name'].toString(), style: const TextStyle(fontSize: 16.0))),
           ),
-          DataColumn(
-            label: Expanded(
-              child: Text('Фамилия', style: TextStyle(fontWeight: FontWeight.bold),),
-            ),
+          TableCell(
+            // verticalAlignment: user['last_name'].toString().length != maxLenList[userList.indexOf(user)]
+            //     ? TableCellVerticalAlignment.fill : TableCellVerticalAlignment.top,
+            child: Container(
+                color: userList.indexOf(user) == 0 ? const Color.fromRGBO(165, 165, 165, 1)
+                     : userList.indexOf(user) % 2 == 0 ?
+                       const Color.fromRGBO(225, 225, 225, 1) : const Color.fromRGBO(240, 240, 240, 1),
+                padding: const EdgeInsets.all(15),
+                child: userList.indexOf(user) == 0
+                    ? Text(user['last_name'], style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold))
+                    : Text(user['last_name'], style: const TextStyle(fontSize: 16.0))),
           ),
-          DataColumn(
-            label: Expanded(
-              child: Text('Email', style: TextStyle(fontWeight: FontWeight.bold),),
-            ),
+          TableCell(
+            // verticalAlignment: user['email'].toString().length != maxLenList[userList.indexOf(user)]
+            //     ? TableCellVerticalAlignment.fill : TableCellVerticalAlignment.top,
+            child: Container(
+                color: userList.indexOf(user) == 0 ? const Color.fromRGBO(165, 165, 165, 1)
+                     : userList.indexOf(user) % 2 == 0 ?
+                       const Color.fromRGBO(225, 225, 225, 1) : const Color.fromRGBO(240, 240, 240, 1),
+                padding: const EdgeInsets.all(15),
+                child: userList.indexOf(user) == 0
+                    ? Text(user['email'], style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold))
+                    : Text(user['email'], style: const TextStyle(fontSize: 16.0))),
           ),
-          DataColumn(
-            label: Expanded(
-              child: Text('Роль', style: TextStyle(fontWeight: FontWeight.bold),),
-            ),
+          TableCell(
+            // verticalAlignment: user['role'].toString().length != maxLenList[userList.indexOf(user)]
+            //     ? TableCellVerticalAlignment.fill : TableCellVerticalAlignment.top,
+            child: Container(
+                color: userList.indexOf(user) == 0 ? const Color.fromRGBO(165, 165, 165, 1)
+                     : userList.indexOf(user) % 2 == 0 ?
+                       const Color.fromRGBO(225, 225, 225, 1) : const Color.fromRGBO(240, 240, 240, 1),
+                padding: const EdgeInsets.all(15),
+                child: userList.indexOf(user) == 0
+                    ? Text(user['role'], style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold))
+                    : Text(user['role'], style: const TextStyle(fontSize: 16.0))),
           ),
-          DataColumn(
-            label: Expanded(
-              child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold),),
-            ),
-          ),
-        ],
-      rows: const <DataRow>[
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Джоан')),
-            DataCell(Text('Джетт')),
-            DataCell(Text('jj@gmail.com')),
-            DataCell(Text('Координатор')),
-            DataCell(EditButton())
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Андрей')),
-            DataCell(Text('Сущенко')),
-            DataCell(Text('suschenkoaa@mail.ru')),
-            DataCell(Text('Бегун')),
-            DataCell(EditButton())
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Cœur cœur cœur cœur')),
-            DataCell(Text('Ton cœur bat, ton cœur bat')),
-            DataCell(Text('Ton cœur bat encore')),
-            DataCell(Text('La chamade Shalom')),
-            DataCell(EditButton())
-          ],
-        ),
-      ],
+          TableCell(
+            // verticalAlignment: user['button'].toString().length != maxLenList[userList.indexOf(user)]
+            //     ? TableCellVerticalAlignment.fill : TableCellVerticalAlignment.top,
+            child: Container(
+                color: userList.indexOf(user) == 0 ? const Color.fromRGBO(165, 165, 165, 1)
+                     : userList.indexOf(user) % 2 == 0 ?
+                       const Color.fromRGBO(225, 225, 225, 1) : const Color.fromRGBO(240, 240, 240, 1),
+                padding: const EdgeInsets.all(8),
+                child: userList.indexOf(user) == 0 ? const SizedBox(width: 50, height: 33)
+                     : const Padding(padding: EdgeInsets.all(2.0), child: EditButton(),)),
+          )
+        ]);
+      }).toList(),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:marathon/classes/text_presets.dart';
 
 class EventRegistrationHomeScreen extends StatelessWidget {
   const EventRegistrationHomeScreen({super.key});
@@ -108,6 +109,8 @@ class EventRegistrationScreen extends StatefulWidget {
 class EventRegistrationScreenState extends State<EventRegistrationScreen> {
   @override
   Widget build(BuildContext context) {
+    bool isScreenWide = MediaQuery.sizeOf(context).width >= 800;
+
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 120,
@@ -163,26 +166,32 @@ class EventRegistrationScreenState extends State<EventRegistrationScreen> {
         backgroundColor: const Color.fromRGBO(82, 82, 82, 1),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Регистрация на марафон',
-              style: TextStyle(fontSize: 30, color: Color.fromRGBO(91, 91, 91, 1)),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: const Text(
-                  'Пожалуйста, заполните всю информацию, чтобы зарегистрироваться на Skills Marathon 2023, проводимом в г. Находка, Russia. С вами свяжутся после регистрации для уточнения оплаты и другой информации.',
-                  style: TextStyle(fontSize: 16, color: Colors.black),
-                  textAlign: TextAlign.center,
-                ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 20),
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Header(text: 'Регистрация на марафон'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: const Text(
+                        'Пожалуйста, заполните всю информацию, чтобы зарегистрироваться на Skills Marathon 2023, проводимом в г. Находка, Russia. С вами свяжутся после регистрации для уточнения оплаты и другой информации.',
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: isScreenWide ? 10 : 25),
+                  const RegistrationForms(),
+                ],
               ),
             ),
-            const RegistrationForms(),
-          ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(
@@ -216,132 +225,138 @@ class RegistrationFormsState extends State<RegistrationForms> {
   @override
   Widget build(BuildContext context) {
     var pageState = context.watch<PageState>();
+    bool isScreenWide = MediaQuery.sizeOf(context).width >= 800;
 
     return Form(
       key: _formKey,
       child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
+        child: IntrinsicWidth(
+          child: Column(
+            children: [
+              Flex(
+                direction: isScreenWide ? Axis.horizontal : Axis.vertical,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Subheader(text: 'Вид марафона'),
-                  const SizedBox(
-                    width: 320,
-                    child: MarathonTypeList()), //выбор типа марафона
-                  const SizedBox(height: 15),
-                  const Subheader(text: 'Детали спонсорства'),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: IntrinsicHeight (
-                      child: Row(
-                        mainAxisSize:MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: <Widget> [
-                                  Text ("Взнос:", style: TextStyle(fontSize: 16),),
-                                  Text ("Сумма взноса:", style: TextStyle(fontSize: 16),),
-                                ],
-                          ),
-                          const SizedBox(width: 10,),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              RegDropdownMenu(list: fundList,),
-                              const SizedBox(height: 5),
-                              SizedBox(
-                                width: 180,
-                                child: TextFormField(
-                                  controller: _donationController,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty || double.tryParse(value) == null) {
-                                      return 'Неверный ввод';
-                                    }
-                                    return null;
-                                    },
-                                  decoration: const InputDecoration(
-                                      hintText: "\$413",
-                                      hintStyle: TextStyle(fontStyle: FontStyle.italic),
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                                      border: OutlineInputBorder(),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
-                                      )
-                                  ),
-                                  style: const TextStyle(fontSize: 16),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              SponsorInfo(),
-                              SizedBox(height: 32),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ), //детали спонсорства
-                  const SizedBox(height: 15),
-                  Row(
-                      mainAxisSize:MainAxisSize.min,
+                  Column(
                       children: [
-                        OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
-                            side: const BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
+                        const Subheader(text: 'Вид марафона'),
+                        const SizedBox(
+                          width: 320,
+                          child: MarathonTypeList()), //выбор типа марафона
+                        SizedBox(height: isScreenWide ? 10 : 25),
+                        const Subheader(text: 'Детали спонсорства'),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: IntrinsicHeight (
+                            child: Row(
+                              mainAxisSize:MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Column(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: <Widget> [
+                                        DefaultText(text: "Взнос:"),
+                                        DefaultText(text: "Сумма взноса:"),
+                                      ],
+                                ),
+                                const SizedBox(width: 10,),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    RegDropdownMenu(list: fundList,),
+                                    const SizedBox(height: 5),
+                                    SizedBox(
+                                      width: 180,
+                                      child: TextFormField(
+                                        controller: _donationController,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty || double.tryParse(value) == null) {
+                                            return 'Неверный ввод';
+                                          }
+                                          return null;
+                                          },
+                                        decoration: const InputDecoration(
+                                            hintText: "\$413",
+                                            hintStyle: TextStyle(fontStyle: FontStyle.italic),
+                                            isDense: true,
+                                            contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                                            border: OutlineInputBorder(),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
+                                            )
+                                        ),
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    SponsorInfo(),
+                                    SizedBox(height: 32),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              //магия какая-то
-                            }
-                          },
-                          child: const Text(
-                              'Регистрация',
-                              style: TextStyle(color: Colors.black, fontSize: 16)
-                          ),
-                        ), //кнопка регистрации
-                        const SizedBox(width: 10),
-                        OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
-                            side: const BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
-                          ),
-                          onPressed: () {
-                            _formKey.currentState!.reset();
-                            _donationController.text = "";
-                            pageState.resetValues();
-                          },
-                          child: const Text(
-                              'Отмена',
-                              style: TextStyle(color: Colors.black, fontSize: 16,)
-                          ),
-                        ), //кнопка отмены
-                      ]
-                  ), //кнопки
+                        ), //детали спонсорства
+                      ],
+                    ),
+                  SizedBox(width: isScreenWide ? 15 : 20,),
+                  Column(
+                    children: [
+                      SizedBox(height: isScreenWide ? 0 : 25),
+                      const Subheader(text: "Варианты комплектов"),
+                      const SizedBox(
+                          width: 350,
+                          child: KitTypeList()),
+                      SizedBox(height: isScreenWide ? 15 : 25),
+                      const Subheader(text: "Регистрационный взнос"),
+                      Text("\$${pageState.curPayment}",
+                        style: const TextStyle(fontSize: 55, color: Color.fromRGBO(153, 153, 153, 1)),)
+                    ],
+                  ),
                 ],
               ),
-            const SizedBox(width: 20,),
-            Column(
-              children: [
-                const Subheader(text: "Варианты комплектов"),
-                const SizedBox(
-                    width: 350,
-                    child: KitTypeList()),
-                const SizedBox(height: 15),
-                const Subheader(text: "Регистрационный взнос"),
-                Text("\$${pageState.curPayment}",
-                  style: const TextStyle(fontSize: 55, color: Color.fromRGBO(153, 153, 153, 1)),)
-              ],
-            ),
-          ],
+              SizedBox(height: isScreenWide ? 5 : 25),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: isScreenWide ? 100.0 : 0),
+                child: Row(
+                    mainAxisAlignment: isScreenWide ? MainAxisAlignment.start : MainAxisAlignment.center,
+                    children: [
+                      OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
+                          side: const BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            //магия какая-то
+                          }
+                        },
+                        child: const DefaultText(text: 'Регистрация'),
+                      ), //кнопка регистрации
+                      const SizedBox(width: 10),
+                      OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
+                          side: const BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
+                        ),
+                        onPressed: () {
+                          _formKey.currentState!.reset();
+                          _donationController.text = "";
+                          pageState.resetValues();
+                        },
+                        child: const DefaultText(text: 'Отмена'),
+                      ), //кнопка отмены
+                    ]
+                ),
+              ), //кнопки
+            ],
+          ),
         ),
       ),
     );
@@ -481,7 +496,7 @@ class MarathonTypeList extends StatelessWidget {
             onChanged: (bool? value) {
               pageState.updateIsFullMarathon(value!);
             },
-            title: const Text('42км Полный марафон (\$145)', style: TextStyle(fontSize: 16),),
+            title: const DefaultText(text: '42км Полный марафон (\$145)'),
           ),
           CheckboxListTile(
             controlAffinity: ListTileControlAffinity.leading,
@@ -491,7 +506,7 @@ class MarathonTypeList extends StatelessWidget {
             onChanged: (bool? value) {
               pageState.updateIsHalfMarathon(value!);
             },
-            title: const Text('21км Полумарафон (\$75)', style: TextStyle(fontSize: 16),),
+            title: const DefaultText(text: '21км Полумарафон (\$75)'),
           ),
           CheckboxListTile(
             controlAffinity: ListTileControlAffinity.leading,
@@ -501,7 +516,7 @@ class MarathonTypeList extends StatelessWidget {
             onChanged: (bool? value) {
               pageState.updateIsShortRange(value!);
             },
-            title: const Text('5км Малая дистанция (\$20)', style: TextStyle(fontSize: 16),),
+            title: const DefaultText(text: '5км Малая дистанция (\$20)'),
           ),
         ],
     );
@@ -553,7 +568,7 @@ class SponsorInfo extends StatelessWidget {
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.pop(context, 'OK'),
-              child: const Text('OK'),
+              child: const DefaultText(text: 'OK'),
             ),
           ],
         ),
@@ -601,27 +616,3 @@ class _ImageIconState extends State<ImageIcon> {
     );
   }
 }
-
-
-class Subheader extends StatelessWidget {
-  const Subheader({
-    super.key,
-    required this.text,
-  });
-
-  final text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text('${text}',
-        style: const TextStyle(
-            fontSize: 20,
-            color: Color.fromRGBO(153, 153, 153, 1),
-            fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-}
-

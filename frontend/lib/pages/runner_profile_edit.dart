@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:string_validator/string_validator.dart';
+import 'package:marathon/classes/text_presets.dart';
 
 class RunnerProfileEditHomeScreen extends StatelessWidget {
   const RunnerProfileEditHomeScreen({super.key});
@@ -63,6 +64,8 @@ class RunnerProfileEditScreen extends StatefulWidget {
 class RunnerProfileEditScreenState extends State<RunnerProfileEditScreen> {
   @override
   Widget build(BuildContext context) {
+    bool isScreenWide = MediaQuery.sizeOf(context).width >= 800;
+
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 120,
@@ -117,16 +120,22 @@ class RunnerProfileEditScreenState extends State<RunnerProfileEditScreen> {
         ],
         backgroundColor: const Color.fromRGBO(82, 82, 82, 1),
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Редактирование профиля',
-              style: TextStyle(fontSize: 30, color: Color.fromRGBO(91, 91, 91, 1)),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 20),
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Header(text: 'Редактирование профиля'),
+                  SizedBox(height: isScreenWide ? 0 : 10),
+                  const EditProfileForms(),
+                ],
+              ),
             ),
-            EditProfileForms(),
-          ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(
@@ -166,13 +175,15 @@ class EditProfileFormsState extends State<EditProfileForms> {
   @override
   Widget build(BuildContext context) {
     var pageState = context.watch<PageState>();
+    bool isScreenWide = MediaQuery.sizeOf(context).width >= 800;
 
     return Form(
       key: _formKey,
       child: Center(
         child: Column(
           children: [
-            Row(
+            Flex(
+              direction: isScreenWide ? Axis.horizontal : Axis.vertical,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
@@ -185,12 +196,12 @@ class EditProfileFormsState extends State<EditProfileForms> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget> [
-                            Text ("Email:", style: TextStyle(fontSize: 16, color: Colors.black),),
-                            Text ("Имя:", style: TextStyle(fontSize: 16, color: Colors.black),),
-                            Text ("Фамилия:", style: TextStyle(fontSize: 16, color: Colors.black),),
-                            Text ("Пол:", style: TextStyle(fontSize: 16, color: Colors.black),),
-                            Text ("Дата рождения:", style: TextStyle(fontSize: 16, color: Colors.black),),
-                            Text ("Страна:", style: TextStyle(fontSize: 16, color: Colors.black),),
+                            DefaultText (text: "Email:"),
+                            DefaultText (text: "Имя:"),
+                            DefaultText (text: "Фамилия:"),
+                            DefaultText (text: "Пол:"),
+                            DefaultText (text: "Дата рождения:"),
+                            DefaultText (text: "Страна:"),
                           ],
                         ),
                         const SizedBox(width: 10,),
@@ -203,12 +214,7 @@ class EditProfileFormsState extends State<EditProfileForms> {
                               child: SizedBox(
                                 width: 180,
                                 height: 20,
-                                child: Text("suschenkoaa@mail.ru",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: Color.fromRGBO(150, 150, 150, 1),
-                                      fontStyle: FontStyle.italic,
-                                  )),
+                                child: GreyText(text: "suschenkoaa@mail.ru"),
                               ),
                             ), //email
                             const SizedBox(height: 5),
@@ -307,13 +313,14 @@ class EditProfileFormsState extends State<EditProfileForms> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 50,),
+                const SizedBox(width: 50, height: 20),
                 Column(
                   children: [
                     const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: ImageForm(),
                     ),
+                    SizedBox(height: isScreenWide ? 0 : 10),
                     const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Subheader(text: "Смена пароля"),
@@ -325,7 +332,7 @@ class EditProfileFormsState extends State<EditProfileForms> {
                         text: const TextSpan(
                           style: TextStyle(fontSize: 16.0, color: Color.fromRGBO(150, 150, 150, 1), fontStyle: FontStyle.italic),
                           children: <TextSpan> [TextSpan(text:
-                          'Оставьте эти поля незаполненными, если не хотите изменять пароль'),
+                            'Оставьте эти поля незаполненными, если не хотите изменять пароль'),
                           ],
                         ),
                       ),
@@ -340,8 +347,8 @@ class EditProfileFormsState extends State<EditProfileForms> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget> [
-                                Text ("Пароль:", style: TextStyle(fontSize: 16, color: Colors.black),),
-                                Text ("Повторите пароль:", style: TextStyle(fontSize: 16, color: Colors.black),),
+                                DefaultText (text: "Пароль:"),
+                                DefaultText (text: "Повторите пароль:"),
                               ],
                             ),
                             const SizedBox(width: 10,),
@@ -421,24 +428,21 @@ class EditProfileFormsState extends State<EditProfileForms> {
                 ),
               ],
             ),
-            const SizedBox(height: 15),
+            SizedBox(height: isScreenWide ? 15 : 25),
             Row(
                 mainAxisSize:MainAxisSize.min,
                 children: [
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(242, 242, 242, 1),
-                      side: BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
+                      backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
+                      side: const BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         //магия какая-то
                       }
                     },
-                    child: const Text(
-                        'Сохранить',
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                    ),
+                    child: const DefaultText (text: 'Сохранить'),
                   ),
                   const SizedBox(width: 10),
                   OutlinedButton(
@@ -456,10 +460,7 @@ class EditProfileFormsState extends State<EditProfileForms> {
                       pageState.resetPfp();
                       pageState.resetDropdownMenus();
                     },
-                    child: const Text(
-                        'Отмена',
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                    ),
+                    child: const DefaultText (text: 'Отмена'),
                   ),
                 ]
             ),
@@ -593,15 +594,15 @@ class ImageFormState extends State<ImageForm> {
                 width: 90,
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(234, 234, 234, 1),
-                  border: Border.all(width: 1, color: Color.fromRGBO(82, 82, 82, 1),),),
+                  border: Border.all(width: 1, color: const Color.fromRGBO(82, 82, 82, 1),),),
                 child: _logoImage != null ? Image.file(_logoImage!, height: 120) :
                        const Text("Фото", style: TextStyle(fontSize: 16, color: Colors.black),),
               ),
-              SizedBox(height: 8,),
+              const SizedBox(height: 8,),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  backgroundColor: Color.fromRGBO(242, 242, 242, 1),
-                  side: BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
+                  backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
+                  side: const BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
                 ),
                 onPressed: () {
                   _selectLogoImage;
@@ -614,28 +615,6 @@ class ImageFormState extends State<ImageForm> {
             ],
           )
         ],
-      ),
-    );
-  }
-}
-
-class Subheader extends StatelessWidget {
-  const Subheader({
-    super.key,
-    required this.text,
-  });
-
-  final text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text('${text}',
-        style: const TextStyle(
-            fontSize: 20,
-            color: Color.fromRGBO(153, 153, 153, 1),
-            fontWeight: FontWeight.bold),
       ),
     );
   }

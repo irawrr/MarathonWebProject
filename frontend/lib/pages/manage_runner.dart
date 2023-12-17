@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:string_validator/string_validator.dart';
+import 'package:marathon/classes/text_presets.dart';
 
 class ManageRunnerHomeScreen extends StatelessWidget {
   const ManageRunnerHomeScreen({super.key});
@@ -31,8 +31,11 @@ class ManageRunnerScreen extends StatefulWidget {
 }
 
 class ManageRunnerScreenState extends State<ManageRunnerScreen> {
+
   @override
   Widget build(BuildContext context) {
+    bool isScreenWide = MediaQuery.sizeOf(context).width >= 900;
+
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 120,
@@ -87,140 +90,149 @@ class ManageRunnerScreenState extends State<ManageRunnerScreen> {
         ],
         backgroundColor: const Color.fromRGBO(82, 82, 82, 1),
       ),
-      body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              //SizedBox(height: MediaQuery.sizeOf(context).height * 0.15,),
-              const Text(
-                'Редактирование профиля',
-                style: TextStyle(fontSize: 30, color: Color.fromRGBO(91, 91, 91, 1)),
-              ),
-              const SizedBox(height: 10,),
-              const Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: IntrinsicHeight (
-                      child: Row(
-                        mainAxisSize:MainAxisSize.min,
+      body: Center(
+          child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(50.0),
+                child: FittedBox(
+                  fit: BoxFit.contain,
+                  child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Column(
+                          const Header(text: 'Редактирование профиля'),
+                          const SizedBox(height: 15,),
+                          Flex(
+                            direction: isScreenWide ? Axis.horizontal : Axis.vertical,
+                            mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget> [
-                              DefaultText(text: "Email:"),
-                              SizedBox(height: 5,),
-                              DefaultText(text: "Имя:"),
-                              SizedBox(height: 5,),
-                              DefaultText(text: "Фамилия:"),
-                              SizedBox(height: 5,),
-                              DefaultText(text: "Пол:"),
-                              SizedBox(height: 5,),
-                              DefaultText(text: "Дата рождения:"),
-                              SizedBox(height: 5,),
-                              DefaultText(text: "Страна:"),
-                              SizedBox(height: 5,),
-                              DefaultText(text: "Благотворит:"),
-                              SizedBox(height: 5,),
-                              DefaultText(text: "Пожертвовано:"),
-                              SizedBox(height: 5,),
-                              DefaultText(text: "Выбранный пакет:"),
-                              SizedBox(height: 5,),
-                              DefaultText(text: "Дистанция:"),
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: IntrinsicHeight (
+                                  child: Row(
+                                    mainAxisSize:MainAxisSize.min,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: <Widget> [
+                                          DefaultText(text: "Email:"),
+                                          SizedBox(height: 5,),
+                                          DefaultText(text: "Имя:"),
+                                          SizedBox(height: 5,),
+                                          DefaultText(text: "Фамилия:"),
+                                          SizedBox(height: 5,),
+                                          DefaultText(text: "Пол:"),
+                                          SizedBox(height: 5,),
+                                          DefaultText(text: "Дата рождения:"),
+                                          SizedBox(height: 5,),
+                                          DefaultText(text: "Страна:"),
+                                          SizedBox(height: 5,),
+                                          DefaultText(text: "Благотворит:"),
+                                          SizedBox(height: 5,),
+                                          DefaultText(text: "Пожертвовано:"),
+                                          SizedBox(height: 5,),
+                                          DefaultText(text: "Выбранный пакет:"),
+                                          SizedBox(height: 5,),
+                                          DefaultText(text: "Дистанция:"),
+                                        ],
+                                      ),
+                                      SizedBox(width: 10,),
+                                      Column(
+                                         mainAxisSize: MainAxisSize.min,
+                                         crossAxisAlignment: CrossAxisAlignment.start,
+                                         children: <Widget> [
+                                           GreyText(text: "kurochkina@yandex.ru"),
+                                           SizedBox(height: 5,),
+                                           GreyText(text: "Ирина"),
+                                           SizedBox(height: 5,),
+                                           GreyText(text: "Курочкина"),
+                                           SizedBox(height: 5,),
+                                           GreyText(text: "женский"),
+                                           SizedBox(height: 5,),
+                                           GreyText(text: "1954-02-12"),
+                                           SizedBox(height: 5,),
+                                           GreyText(text: "Россия"),
+                                           SizedBox(height: 5,),
+                                           GreyText(text: "Фонд линейной алгебры"),
+                                           SizedBox(height: 5,),
+                                           GreyText(text: "5\$"),
+                                           SizedBox(height: 5,),
+                                           GreyText(text: "Пакет C"),
+                                           SizedBox(height: 5,),
+                                           GreyText(text: "Полный марафон"),
+                                         ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 50, height: 25,),
+                              ReducedImageForm(),
+                              SizedBox(width: 50, height: 25,),
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: RegistrationStatusCheck(),
+                              ),
                             ],
                           ),
-                          SizedBox(width: 10,),
-                          Column(
-                             mainAxisSize: MainAxisSize.min,
-                             crossAxisAlignment: CrossAxisAlignment.start,
-                             children: <Widget> [
-                               GreyText(text: "kurochkina@yandex.ru"),
-                               SizedBox(height: 5,),
-                               GreyText(text: "Ирина"),
-                               SizedBox(height: 5,),
-                               GreyText(text: "Курочкина"),
-                               SizedBox(height: 5,),
-                               GreyText(text: "женский"),
-                               SizedBox(height: 5,),
-                               GreyText(text: "1954-02-12"),
-                               SizedBox(height: 5,),
-                               GreyText(text: "Россия"),
-                               SizedBox(height: 5,),
-                               GreyText(text: "Фонд линейной алгебры"),
-                               SizedBox(height: 5,),
-                               GreyText(text: "5\$"),
-                               SizedBox(height: 5,),
-                               GreyText(text: "Пакет C"),
-                               SizedBox(height: 5,),
-                               GreyText(text: "Полный марафон"),
-                             ],
+                          const SizedBox(height: 15),
+                          Flex(
+                            direction: isScreenWide ? Axis.horizontal : Axis.vertical,
+                            mainAxisSize:MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  backgroundColor: Color.fromRGBO(242, 242, 242, 1),
+                                  side: BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
+                                ),
+                                onPressed: () {
+                                  //магия какая-то
+                                },
+                                child: const Text(
+                                  'Показ сертификата',
+                                  style: TextStyle(fontSize: 16, color: Colors.black),
+                                ),
+                              ),
+                              const SizedBox(width: 10, height: 5),
+                              OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
+                                  side: const BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
+                                ),
+                                onPressed: () {
+                                  //магия какая-то
+                                },
+                                child: const Text(
+                                  'Печать бейджа',
+                                  style: TextStyle(fontSize: 16, color: Colors.black),
+                                ),
+                              ),
+                              const SizedBox(width: 10, height: 5),
+                              OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
+                                  side: const BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
+                                ),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/runner_edit');
+                                },
+                                child: const Text(
+                                  'Редактирование профиля',
+                                  style: TextStyle(fontSize: 16, color: Colors.black),
+                                ),
+                              ),
+                            ]
                           ),
-                        ],
+                          //SizedBox(height: MediaQuery.sizeOf(context).height * 0.15,),
+                        ]
                       ),
-                    ),
-                  ),
-                  SizedBox(width: 50,),
-                  ReducedImageForm(),
-                  SizedBox(width: 50,),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: RegistrationStatusCheck(),
-                  ),
-                ],
+                ),
               ),
-              const SizedBox(height: 15),
-              Row(
-                mainAxisSize:MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(242, 242, 242, 1),
-                      side: BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
-                    ),
-                    onPressed: () {
-                      //магия какая-то
-                    },
-                    child: const Text(
-                      'Показ сертификата',
-                      style: TextStyle(fontSize: 16, color: Colors.black),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
-                      side: const BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
-                    ),
-                    onPressed: () {
-                      //магия какая-то
-                    },
-                    child: const Text(
-                      'Печать бейджа',
-                      style: TextStyle(fontSize: 16, color: Colors.black),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
-                      side: const BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/runner_edit');
-                    },
-                    child: const Text(
-                      'Редактирование профиля',
-                      style: TextStyle(fontSize: 16, color: Colors.black),
-                    ),
-                  ),
-                ]
-              ),
-              //SizedBox(height: MediaQuery.sizeOf(context).height * 0.15,),
-            ]
-          ),
+            ),
+        ),
+
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(12),
         height: 50.0,
@@ -272,7 +284,7 @@ class _RegistrationStatusCheckState extends State<RegistrationStatusCheck> {
                   GreyText(text: "Вышел на старт"),
                 ],
               ),
-              const SizedBox(width: 10,),
+              const SizedBox(width: 10, height: 10),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -404,57 +416,8 @@ class ReducedImageForm extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color.fromRGBO(234, 234, 234, 1),
         border: Border.all(width: 1, color: const Color.fromRGBO(82, 82, 82, 1),),),
-      child: logoImage != null ? Image.file(logoImage!, height: 250) :
+      child: logoImage != null ? Image.file(logoImage!, height: 250, fit: BoxFit.cover,) :
       const DefaultText(text: "Фото"),
-    );
-  }
-}
-
-
-class DefaultText extends StatelessWidget {
-  const DefaultText({
-    super.key,
-    required this.text,
-  });
-
-  final text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text('${text}', style: TextStyle(fontSize: 16, color: Colors.black),);
-  }
-}
-class GreyText extends StatelessWidget {
-  const GreyText({
-    super.key,
-    required this.text,
-  });
-
-  final text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text('${text}', style: const TextStyle(fontSize: 16, color: Color.fromRGBO(150, 150, 150, 1),));
-  }
-}
-class Subheader extends StatelessWidget {
-  const Subheader({
-    super.key,
-    required this.text,
-  });
-
-  final text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text('${text}',
-        style: const TextStyle(
-            fontSize: 20,
-            color: Color.fromRGBO(153, 153, 153, 1),
-            fontWeight: FontWeight.bold),
-      ),
     );
   }
 }
