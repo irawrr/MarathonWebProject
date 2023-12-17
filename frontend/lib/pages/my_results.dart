@@ -101,83 +101,34 @@ class _MyResultsScreen extends State<MyResultsScreen> {
                 Flex(
                   direction: isScreenWide ? Axis.horizontal : Axis.vertical,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 20, right: 10),
-                        child:
-                          Text('Пол:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23,color: Color.fromARGB(255, 53, 53, 53))),
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20, right: 40),
+                      child: RichText(
+                        text: const TextSpan(
+                          style: TextStyle(fontSize: 23.0, color: Color.fromARGB(255, 53, 53, 53)),
+                          children: <TextSpan>[
+                            TextSpan(text: 'Пол:  ', style: TextStyle(fontWeight: FontWeight.bold)),
+                            TextSpan(text: 'мужской'),
+                          ],
+                        ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 20, right: 40),
-                        child:
-                          Text('мужской', style: TextStyle(fontSize: 23,color: Color.fromARGB(255, 53, 53, 53))),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: RichText(
+                        text: const TextSpan(
+                          style: TextStyle(fontSize: 23.0, color: Color.fromARGB(255, 53, 53, 53)),
+                          children: <TextSpan>[
+                            TextSpan(text: 'Возрастная категория:  ', style: TextStyle(fontWeight: FontWeight.bold)),
+                            TextSpan(text: '18-29'),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 20, right: 10),
-                        child:
-                          Text('Возрастная категория:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23,color: Color.fromARGB(255, 53, 53, 53))),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 20, right: 40),
-                        child:
-                          Text('18-29', style: TextStyle(fontSize: 23,color: Color.fromARGB(255, 53, 53, 53))),
-                      ),
-                    ],
-                  )
+                    ),
                   ]
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(25),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Table(
-                      columnWidths: const {
-                        0: FixedColumnWidth(200),
-                        1: FixedColumnWidth(250),
-                        2: FixedColumnWidth(150),
-                        3: FixedColumnWidth(150),
-                        4: FixedColumnWidth(150),
-                      },
-                      children: _users.map((user) {
-                        return TableRow(children: [
-                          Container(
-                              padding: const EdgeInsets.all(15),
-                              child:_users.indexOf(user) == 0
-                                  ? Text(user['marathon'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-                                  : Text(user['marathon'])),
-                          Container(
-                              padding: const EdgeInsets.all(15),
-                              child:_users.indexOf(user) == 0
-                                  ? Text(user['distance'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-                                  : Text(user['distance'])),
-                          Container(
-                              padding: const EdgeInsets.all(15),
-                              child:_users.indexOf(user) == 0
-                                  ? Text(user['time'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-                                  : Text(user['time'])),
-                          Container(
-                              padding: const EdgeInsets.all(15),
-                              child:_users.indexOf(user) == 0
-                                  ? Text(user['overall_place'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-                                  : Text(user['overall_place'])),
-                          Container(
-                              padding: const EdgeInsets.all(15),
-                              child:_users.indexOf(user) == 0
-                                  ? Text(user['category_place'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-                                  : Text(user['category_place'])),
-                        ]);
-                      }).toList()
-                    ),
-                  ),
-              )
+                ResultTable(users: _users)
               ]
 
       ),
@@ -195,5 +146,62 @@ class _MyResultsScreen extends State<MyResultsScreen> {
     ),
     ),
     );
+  }
+}
+
+class ResultTable extends StatelessWidget {
+  const ResultTable({
+    super.key,
+    required List<Map> users,
+  }) : _users = users;
+
+  final List<Map> _users;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(25),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Table(
+          columnWidths: const {
+            0: FixedColumnWidth(200),
+            1: FixedColumnWidth(250),
+            2: FixedColumnWidth(150),
+            3: FixedColumnWidth(150),
+            4: FixedColumnWidth(150),
+          },
+          children: _users.map((user) {
+            return TableRow(children: [
+              Container(
+                  padding: const EdgeInsets.all(15),
+                  child:_users.indexOf(user) == 0
+                      ? Text(user['marathon'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+                      : Text(user['marathon'])),
+              Container(
+                  padding: const EdgeInsets.all(15),
+                  child:_users.indexOf(user) == 0
+                      ? Text(user['distance'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+                      : Text(user['distance'])),
+              Container(
+                  padding: const EdgeInsets.all(15),
+                  child:_users.indexOf(user) == 0
+                      ? Text(user['time'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+                      : Text(user['time'])),
+              Container(
+                  padding: const EdgeInsets.all(15),
+                  child:_users.indexOf(user) == 0
+                      ? Text(user['overall_place'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+                      : Text(user['overall_place'])),
+              Container(
+                  padding: const EdgeInsets.all(15),
+                  child:_users.indexOf(user) == 0
+                      ? Text(user['category_place'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+                      : Text(user['category_place'])),
+            ]);
+          }).toList()
+        ),
+      ),
+              );
   }
 }
