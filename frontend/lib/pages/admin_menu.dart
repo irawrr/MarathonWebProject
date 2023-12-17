@@ -197,7 +197,7 @@ class _Context1 extends State<Context1> {
                               backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 233, 233, 233)),
                               padding: MaterialStateProperty.all(EdgeInsets.all(5))
                             ),
-                              onPressed: () { }, child: const Text('Волонтеры', style: TextStyle(fontSize: 25,color: Colors.black))),
+                              onPressed: () {Navigator.pushNamed(context, '/manage_volonteer');}, child: const Text('Волонтеры', style: TextStyle(fontSize: 25,color: Colors.black))),
                         ),
                       ],
                     ),
@@ -220,7 +220,7 @@ class _Context1 extends State<Context1> {
                               backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 233, 233, 233)),
                               padding: MaterialStateProperty.all(EdgeInsets.all(5))
                             ),
-                              onPressed: () { }, child: const Text('Благотворительные организации', style: TextStyle(fontSize: 25,color: Colors.black), textAlign: TextAlign.center,)),
+                              onPressed: () {Navigator.pushNamed(context, '/control_charity');}, child: const Text('Благотворительные организации', style: TextStyle(fontSize: 25,color: Colors.black), textAlign: TextAlign.center,)),
                         ),
                         SizedBox(
                           width: 25,
@@ -238,7 +238,7 @@ class _Context1 extends State<Context1> {
                               backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 233, 233, 233)),
                               padding: MaterialStateProperty.all(EdgeInsets.all(5))
                             ),
-                              onPressed: () { }, child: const Text('Интвентарь', style: TextStyle(fontSize: 25,color: Colors.black))),
+                              onPressed: () {Navigator.pushNamed(context, '/inventory');}, child: const Text('Интвентарь', style: TextStyle(fontSize: 25,color: Colors.black))),
                         ),
                       ],
                     ),

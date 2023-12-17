@@ -176,7 +176,7 @@ class _Context1 extends State<Context1> {
                           backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 233, 233, 233)),
                           padding: MaterialStateProperty.all(EdgeInsets.all(5))
                         ),
-                          onPressed: () { }, child: const Text('Спонсоры', style: TextStyle(fontSize: 25,color: Colors.black))),
+                          onPressed: () {Navigator.pushNamed(context, '/sponsor_view'); }, child: const Text('Спонсоры', style: TextStyle(fontSize: 25,color: Colors.black))),
                     ),
                     SizedBox(
                       width: 25,
@@ -194,7 +194,7 @@ class _Context1 extends State<Context1> {
                           backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 233, 233, 233)),
                           padding: MaterialStateProperty.all(EdgeInsets.all(5))
                         ),
-                          onPressed: () { }, child: const Text('Бегуны', style: TextStyle(fontSize: 25,color: Colors.black))),
+                          onPressed: () {Navigator.pushNamed(context, '/control_runners'); }, child: const Text('Бегуны', style: TextStyle(fontSize: 25,color: Colors.black))),
                     ),
                   ],
                 )

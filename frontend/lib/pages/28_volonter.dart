@@ -85,7 +85,7 @@ class Volonter extends State<MyHomePage> {
                     padding: MaterialStateProperty.all(EdgeInsets.all(5)),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/home');
+                    Navigator.pushNamed(context, '/admin_menu');
                   }, child: const Text('Назад', style: TextStyle(fontSize: 20,color: Colors.black))),
                 ),
               ),
@@ -203,9 +203,7 @@ class Volonter extends State<MyHomePage> {
                           Color.fromARGB(255, 215, 215, 215)),
                       padding: MaterialStateProperty.all(EdgeInsets.all(10)),
                     ),
-                    onPressed: () {
-                      // логика для загрузки волонтеров
-                    },
+                    onPressed: () {Navigator.pushNamed(context, '/load_volunteer');},
                     child: Text(
                       'Загрузка волонтеров',
                       style: TextStyle(fontSize: 20, color: Colors.black),

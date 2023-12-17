@@ -3,6 +3,7 @@ import 'package:marathon/pages/28_volonter.dart';
 import 'package:marathon/pages/add_blago27.dart';
 import 'package:marathon/pages/add_user.dart';
 import 'package:marathon/pages/admin_menu.dart';
+import 'package:marathon/pages/blago_26.dart';
 import 'package:marathon/pages/certificate.dart';
 import 'package:marathon/pages/check_data_screen.dart';
 import 'package:marathon/pages/confirm_reg_screen.dart';
@@ -29,7 +30,6 @@ import 'package:marathon/pages/runner_profile_edit.dart';
 import 'package:marathon/pages/user_management.dart';
 import 'package:marathon/pages/bmr_screen.dart';
 import 'package:marathon/pages/bmi_screen.dart';
-import 'package:marathon/pages/temp.dart';
 import 'pages/main_system_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -66,7 +66,8 @@ void main() => runApp(MaterialApp(
     '/add_user':(context) => const AddUser(),
     '/sponsor_view':(context) => const SponsorView(),
     '/manage_volonteer':(context) => const ManageVolonteer(),
-    '/control_charity':(context) => const ControlCharity()
+    '/control_charity':(context) => const ControlCharity(),
+    '/blago': (context) => const Blago()
 
   },
 ));

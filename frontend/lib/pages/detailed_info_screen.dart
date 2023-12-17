@@ -347,7 +347,7 @@ class _Content2 extends State<Content2> {
                                   ),
                                   backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 233, 233, 233)),
                                 ),
-                                  onPressed: () {}, 
+                                  onPressed: () {Navigator.pushNamed(context, '/blago'); }, 
                                   child: const Text('Благотворительные организации', style: TextStyle(fontSize: 25, color: Colors.black), textAlign: TextAlign.center)),
                             ),
                             SizedBox(

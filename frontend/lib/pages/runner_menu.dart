@@ -311,7 +311,7 @@ class _Content2 extends State<Content2> {
                                   backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 233, 233, 233)),
                                   padding: MaterialStateProperty.all(EdgeInsets.all(5))
                                 ),
-                                  onPressed: () {}, child: const Text('Мои результаты', style: TextStyle(fontSize: 25,color: Colors.black))),
+                                  onPressed: () {Navigator.pushNamed(context, '/my_results');}, child: const Text('Мои результаты', style: TextStyle(fontSize: 25,color: Colors.black))),
                             ),
                             SizedBox(
                               height: 25,
@@ -330,7 +330,7 @@ class _Content2 extends State<Content2> {
                                   padding: MaterialStateProperty.all(EdgeInsets.all(5))
                                 ),
                                   onPressed: () {
-                                    Navigator.pushNamed(context, '/check');
+                                    Navigator.pushNamed(context, '/runner_edit');
                                     }, child: const Text('Редактирование профиля', style: TextStyle(fontSize: 25,color: Colors.black))),
                             ),
                           ]
@@ -350,7 +350,7 @@ class _Content2 extends State<Content2> {
                                   ),
                                   backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 233, 233, 233)),
                                 ),
-                                  onPressed: () {}, child: const Text('Мой спонсор', style: TextStyle(fontSize: 25, color: Colors.black), textAlign: TextAlign.center)),
+                                  onPressed: () {Navigator.pushNamed(context, '/my_sponsor');}, child: const Text('Мой спонсор', style: TextStyle(fontSize: 25, color: Colors.black), textAlign: TextAlign.center)),
                             ),
                             SizedBox(
                               height: 25,

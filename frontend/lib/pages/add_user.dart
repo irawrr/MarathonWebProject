@@ -48,7 +48,7 @@ class _HomePage extends State<HomePage> {
                   padding: MaterialStateProperty.all(EdgeInsets.all(5)),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/home');
+                  Navigator.pushNamed(context, '/user_management');
                 }, child: const Text('Назад', style: TextStyle(fontSize: 20,color: Colors.black))),
               ),
             ),

@@ -419,7 +419,7 @@ class _Charity extends State<Charity> {
                                 backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 222, 222, 222)),
                                 padding: MaterialStateProperty.all(EdgeInsets.all(5)),
                               ),
-                              onPressed: () {}, child:  Text('Заплатить', style: TextStyle(fontSize: 20,color: Colors.black))),
+                              onPressed: () {Navigator.pushNamed(context, '/reg_confirm');}, child:  Text('Заплатить', style: TextStyle(fontSize: 20,color: Colors.black))),
                           )
                         ),
                         Padding(
