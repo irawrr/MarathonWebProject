@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:string_validator/string_validator.dart';
+import 'package:marathon/classes/text_presets.dart';
 
 class RunnerRegistrationHomeScreen extends StatelessWidget {
   const RunnerRegistrationHomeScreen({super.key});
@@ -92,23 +93,30 @@ class RunnerRegistrationScreenState extends State<RunnerRegistrationScreen> {
         backgroundColor: const Color.fromRGBO(82, 82, 82, 1),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Регистрация бегуна',
-              style: TextStyle(fontSize: 30, color: Color.fromRGBO(91, 91, 91, 1)),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: const Text(
-                'Пожалуйста, заполните всю информацию, чтобы зарегистрироваться в качестве бегуна',
-                style: TextStyle(fontSize: 18, color: Colors.black),
-                textAlign: TextAlign.center,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 20),
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Header(text: 'Регистрация бегуна',),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: const Text(
+                      'Пожалуйста, заполните всю информацию, чтобы зарегистрироваться в качестве бегуна',
+                      style: TextStyle(fontSize: 18, color: Colors.black),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const RegistrationForms(),
+                ],
               ),
             ),
-            const RegistrationForms(),
-          ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(
@@ -141,6 +149,7 @@ class RegistrationFormsState extends State<RegistrationForms> {
   final _pwRepeatController = TextEditingController();
   final _nameController = TextEditingController();
   final _surnameController = TextEditingController();
+  final _birthController = TextEditingController();
 
   static final genderList = ['male', 'female'];
   static final countryList = ['country1', 'country2', 'country3']; //заменить на данные бд
@@ -148,15 +157,18 @@ class RegistrationFormsState extends State<RegistrationForms> {
   @override
   Widget build(BuildContext context) {
     var pageState = context.watch<PageState>();
+    bool isScreenWide = MediaQuery.sizeOf(context).width >= 900;
 
     return Form(
       key: _formKey,
       child: Center(
         child: Column(
           children: [
-            Row(
+            Flex(
+              direction: isScreenWide ? Axis.horizontal : Axis.vertical,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const SizedBox(height: 15),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: IntrinsicHeight (
@@ -167,12 +179,12 @@ class RegistrationFormsState extends State<RegistrationForms> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget> [
-                            Text ("Email:"),
-                            Text ("Пароль:"),
-                            Text ("Повторите пароль:"),
-                            Text ("Имя:"),
-                            Text ("Фамилия:"),
-                            Text ("Пол:"),
+                            DefaultText (text: "Email:"),
+                            DefaultText (text: "Пароль:"),
+                            DefaultText (text: "Повторите пароль:"),
+                            DefaultText (text: "Имя:"),
+                            DefaultText (text: "Фамилия:"),
+                            DefaultText (text: "Пол:"),
                           ],
                         ),
                         const SizedBox(width: 10,),
@@ -192,7 +204,10 @@ class RegistrationFormsState extends State<RegistrationForms> {
                                 },
                                 decoration: const InputDecoration(
                                     hintText: "Email",
-                                    hintStyle: TextStyle(fontStyle: FontStyle.italic),
+                                    hintStyle: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: 16,
+                                    ),
                                     isDense: true,
                                     contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
                                     border: OutlineInputBorder(),
@@ -225,7 +240,10 @@ class RegistrationFormsState extends State<RegistrationForms> {
                                 },
                                 decoration: const InputDecoration(
                                     hintText: "Пароль",
-                                    hintStyle: TextStyle(fontStyle: FontStyle.italic),
+                                    hintStyle: TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                      fontSize: 16,
+                                    ),
                                     isDense: true,
                                     contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
                                     border: OutlineInputBorder(),
@@ -251,7 +269,10 @@ class RegistrationFormsState extends State<RegistrationForms> {
                                 },
                                 decoration: const InputDecoration(
                                     hintText: "Повторите пароль",
-                                    hintStyle: TextStyle(fontStyle: FontStyle.italic),
+                                    hintStyle: TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                      fontSize: 16,
+                                    ),
                                     isDense: true,
                                     contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
                                     border: OutlineInputBorder(),
@@ -275,7 +296,10 @@ class RegistrationFormsState extends State<RegistrationForms> {
                                 },
                                 decoration: const InputDecoration(
                                     hintText: "Имя",
-                                    hintStyle: TextStyle(fontStyle: FontStyle.italic),
+                                    hintStyle: TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                      fontSize: 16,
+                                    ),
                                     isDense: true,
                                     contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
                                     border: OutlineInputBorder(),
@@ -299,7 +323,10 @@ class RegistrationFormsState extends State<RegistrationForms> {
                                 },
                                 decoration: const InputDecoration(
                                     hintText: "Фамилия",
-                                    hintStyle: TextStyle(fontStyle: FontStyle.italic),
+                                    hintStyle: TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                      fontSize: 16,
+                                    ),
                                     isDense: true,
                                     contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
                                     border: OutlineInputBorder(),
@@ -318,7 +345,7 @@ class RegistrationFormsState extends State<RegistrationForms> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 100,),
+                const SizedBox(width: 100, height: 15),
                 Column(
                   children: [
                     const Padding(
@@ -335,8 +362,8 @@ class RegistrationFormsState extends State<RegistrationForms> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget> [
-                                Text ("Дата рождения:"),
-                                Text ("Страна:"),
+                                DefaultText (text: "Дата рождения:"),
+                                DefaultText (text: "Страна:"),
                               ],
                             ),
                             const SizedBox(width: 10,),
@@ -344,7 +371,32 @@ class RegistrationFormsState extends State<RegistrationForms> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                RegDropdownMenu(),
+                                SizedBox(
+                                  width: 150,
+                                  child: TextFormField(
+                                    controller: _birthController,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty || !isDate(value)) {
+                                        return 'Неверный ввод';
+                                      }
+                                      return null;
+                                    },
+                                    decoration: const InputDecoration(
+                                        hintText: "2004-12-21",
+                                        hintStyle: TextStyle(
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: 16,
+                                        ),
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                                        border: OutlineInputBorder(),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
+                                        )
+                                    ),
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                ),
                                 const SizedBox(height: 5),
                                 RegDropdownMenu(list: countryList,)
                               ],
@@ -363,24 +415,21 @@ class RegistrationFormsState extends State<RegistrationForms> {
                 children: [
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(242, 242, 242, 1),
-                      side: BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
+                      backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
+                      side: const BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         //магия какая-то
                       }
                     },
-                    child: const Text(
-                        'Регистрация',
-                        style: TextStyle(color: Colors.black)
-                    ),
+                    child: const DefaultText (text: 'Регистрация'),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(242, 242, 242, 1),
-                      side: BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
+                      backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
+                      side: const BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
                     ),
                     onPressed: () {
                       _formKey.currentState!.reset();
@@ -389,13 +438,11 @@ class RegistrationFormsState extends State<RegistrationForms> {
                       _pwRepeatController.text = "";
                       _nameController.text = "";
                       _surnameController.text = "";
+                      _birthController.text = "";
                       pageState.resetPfp();
                       pageState.resetDropdownMenus();
                     },
-                    child: const Text(
-                        'Отмена',
-                        style: TextStyle(color: Colors.black)
-                    ),
+                    child: const DefaultText (text: 'Отмена',),
                   ),
                 ]
             ),
@@ -411,7 +458,7 @@ class RegDropdownMenu extends StatelessWidget {
   static const defaultList = [''];
   final List<String> list;
 
-  RegDropdownMenu({
+  const RegDropdownMenu({
     super.key,
     this.list = defaultList,
   });
@@ -422,7 +469,7 @@ class RegDropdownMenu extends StatelessWidget {
     final curList = list;
 
     return DropdownMenu<String>(
-      textStyle: const TextStyle(fontSize: 14),
+      textStyle: const TextStyle(fontSize: 16),
       inputDecorationTheme: InputDecorationTheme(
         constraints: const BoxConstraints.expand(height: 30),
         border: OutlineInputBorder(
@@ -445,7 +492,7 @@ class RegDropdownMenu extends StatelessWidget {
           value: value,
           label: value,
           style: const ButtonStyle(
-              textStyle: MaterialStatePropertyAll(TextStyle(fontSize: 14))
+              textStyle: MaterialStatePropertyAll(TextStyle(fontSize: 16))
           ),
         );
       }).toList(),
@@ -477,7 +524,9 @@ class ImageFormState extends State<ImageForm> {
           Column (
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              const Text("Файл фото:", textAlign: TextAlign.left,),
+              const Text("Файл фото:",
+                textAlign: TextAlign.left,
+                style: TextStyle(fontSize: 16, color: Colors.black),),
               const SizedBox(height: 8),
               SizedBox(
                 width: 150,
@@ -491,7 +540,10 @@ class ImageFormState extends State<ImageForm> {
                   },
                   decoration: const InputDecoration(
                       hintText: "Photo_logo.jpg",
-                      hintStyle: TextStyle(fontStyle: FontStyle.italic),
+                      hintStyle: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontSize: 16,
+                      ),
                       isDense: true,
                       contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
                       border: OutlineInputBorder(),
@@ -504,7 +556,7 @@ class ImageFormState extends State<ImageForm> {
               ),
             ],
           ),
-          SizedBox(width: 15),
+          const SizedBox(width: 15),
           Column(
             children: [
               Container(
@@ -513,29 +565,26 @@ class ImageFormState extends State<ImageForm> {
                 width: 90,
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(234, 234, 234, 1),
-                  border: Border.all(width: 1, color: Color.fromRGBO(82, 82, 82, 1),),),
+                  border: Border.all(width: 1, color: const Color.fromRGBO(82, 82, 82, 1),),),
                 child: pageState.pfpPath.isNotEmpty ?
                 Image.network(
                   (pageState.pfpPath),
                   fit: BoxFit.fill,
-                ) : const Text("Фото"),
+                ) : const DefaultText (text: "Фото"),
 
               ),
-              SizedBox(height: 8,),
+              const SizedBox(height: 8,),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  backgroundColor: Color.fromRGBO(242, 242, 242, 1),
-                  side: BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
+                  backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
+                  side: const BorderSide(width: 1.0, color: Color.fromRGBO(150, 150, 150, 1)),
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     pageState.updatePfp(_pathController.text);
                   }
                 },
-                child: const Text(
-                    'Просмотр...',
-                    style: TextStyle(color: Colors.black)
-                ),
+                child: const DefaultText (text: 'Просмотр...'),
               ),
             ],
           )
